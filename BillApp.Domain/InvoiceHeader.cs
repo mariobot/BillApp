@@ -23,6 +23,9 @@ namespace BillApp.Domain
         public int Sequence { get; set; }
 
         public string Prefix { get; set; }
-        
+
+        public string AuthorId { get; set; }
+        public virtual ApplicationUser Author { get; set; }
+
     }
 }

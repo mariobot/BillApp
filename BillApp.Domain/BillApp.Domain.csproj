@@ -63,9 +63,17 @@
     <Compile Include="Migrations\201810302211588_First_Migration.Designer.cs">
       <DependentUpon>201810302211588_First_Migration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810311959170_UserToTables.cs" />
+    <Compile Include="Migrations\201810311959170_UserToTables.Designer.cs">
+      <DependentUpon>201810311959170_UserToTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="InvoiceHeader.cs" />
+    <Compile Include="Repository\CustomerRepository.cs" />
+    <Compile Include="Repository\InvoiceHeaderRepository.cs" />
+    <Compile Include="Repository\InvoiceItemRepository.cs" />
+    <Compile Include="Repository\InvoiceRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -74,6 +82,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201810302211588_First_Migration.resx">
       <DependentUpon>201810302211588_First_Migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810311959170_UserToTables.resx">
+      <DependentUpon>201810311959170_UserToTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

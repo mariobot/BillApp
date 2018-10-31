@@ -19,6 +19,9 @@ namespace BillApp.Domain
         public string Phone { get; set; }
 
         public string Email { get; set; }
-        
+
+        public string AuthorId { get; set; }
+        public virtual ApplicationUser Author { get; set; }
+
     }
 }
