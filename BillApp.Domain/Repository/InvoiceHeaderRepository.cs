@@ -4,10 +4,11 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BillApp.Domain.Interface;
 
 namespace BillApp.Domain.Repository
 {
-    public class InvoiceHeaderRepository
+    public class InvoiceHeaderRepository : IInvoiceHeader
     {
         private BillAppDbContext context = new BillAppDbContext();
 
@@ -23,6 +24,12 @@ namespace BillApp.Domain.Repository
             return _invoiceH;
         }
 
+        public InvoiceHeader GetInvoiceHeaderByUser(string userId)
+        {
+            InvoiceHeader _invoiceH = context.InvoiceHeaders.Include(x=>x.Author).Where(x => x.AuthorId == userId).FirstOrDefault();
+            return _invoiceH;
+        }
+
         public void UpdateInvoiceHeader(InvoiceHeader _invoiceH)
         {
             context.Entry(_invoiceH).State = EntityState.Modified;
@@ -34,6 +41,11 @@ namespace BillApp.Domain.Repository
             InvoiceHeader _invoiceH = context.InvoiceHeaders.Find(id);
             context.InvoiceHeaders.Remove(_invoiceH);
             context.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            context.Dispose();
         }
     }
 }
