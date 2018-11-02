@@ -17,3 +17,4 @@ C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\obj\Debug\BillApp.Domain.M
 C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\obj\Debug\BillApp.Domain.csproj.GenerateResource.cache
 C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\obj\Debug\BillApp.Domain.Migrations.UserToTables.resources
 C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\obj\Debug\BillApp.Domain.Migrations.UpdateProxieDefinition.resources
+C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\obj\Debug\BillApp.Domain.csprojAssemblyReference.cache

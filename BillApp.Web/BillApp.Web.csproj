@@ -236,6 +236,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvoiceHeaderController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -384,6 +385,11 @@
     <Content Include="Views\InvoiceHeader\Details.cshtml" />
     <Content Include="Views\InvoiceHeader\Edit.cshtml" />
     <Content Include="Views\InvoiceHeader\Index.cshtml" />
+    <Content Include="Views\Customer\Create.cshtml" />
+    <Content Include="Views\Customer\Delete.cshtml" />
+    <Content Include="Views\Customer\Details.cshtml" />
+    <Content Include="Views\Customer\Edit.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -23,6 +23,12 @@ namespace BillApp.Domain.Repository
             return _customer;
         }
 
+        public List<Customer> GetCustomersByUserId(string userID)
+        {
+            List<Customer> _ListCustomers = context.Customers.Include(x => x.Author).Where(x => x.AuthorId == userID).ToList();
+            return _ListCustomers;
+        }
+
         public void UpdateCustomer(Customer _customer)
         {
             context.Entry(_customer).State = EntityState.Modified;
@@ -34,6 +40,10 @@ namespace BillApp.Domain.Repository
             Customer _customer = context.Customers.Find(id);
             context.Customers.Remove(_customer);
             context.SaveChanges();
+        }
+
+        public void Dispose() {
+            context.Dispose();
         }
     }
 }
