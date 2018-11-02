@@ -16,11 +16,11 @@ namespace BillApp.Web.Controllers
     [Authorize]
     public class InvoiceHeaderController : Controller
     {
-        private IInvoiceHeader _repo;
+        private InvoiceHeaderRepository _repo;
 
-        public InvoiceHeaderController(IInvoiceHeader repo)
+        public InvoiceHeaderController()
         {
-            _repo = repo;
+            _repo = new InvoiceHeaderRepository() ;
         }
 
         // GET: InvoiceHeader
