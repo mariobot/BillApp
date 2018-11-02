@@ -21,6 +21,11 @@ namespace BillApp.Domain.Repository
             return _invoice;
         }
 
+        public List<Invoice> GetInvoicesByUserId(string userId) {
+            List<Invoice> _listInvoices = context.Invoices.Where(x => x.AuthorId == userId).ToList();
+            return _listInvoices;
+        }
+
         public void UpdateInvoice(Invoice _invoice) {
             context.Entry(_invoice).State = EntityState.Modified;
             context.SaveChanges();
@@ -30,6 +35,10 @@ namespace BillApp.Domain.Repository
             Invoice _invoice = context.Invoices.Find(id);
             context.Invoices.Remove(_invoice);
             context.SaveChanges();
+        }
+
+        public void Dispose() {
+            context.Dispose();
         }
     }
 }

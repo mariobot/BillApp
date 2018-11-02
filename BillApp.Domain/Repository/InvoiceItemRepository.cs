@@ -35,5 +35,9 @@ namespace BillApp.Domain.Repository
             context.InvoiceItems.Remove(_invoiceI);
             context.SaveChanges();
         }
+
+        public void Dispose() {
+            context.Dispose();
+        }
     }
 }
