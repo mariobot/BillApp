@@ -9,7 +9,20 @@ namespace BillApp.Web
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/assets/js/jquery.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jstheme").Include(
+                        "~/assets/js/bootstrap.min.js",
+                        "~/assets/js/bootstrap-checkbox-radio.js",
+                        "~/assets/js/bootstrap-notify.js"));
+
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/assets/css/bootstrap.min.css",
+                      "~/assets/css/animate.min.css",
+                      "~/assets/css/paper-dashboard.css",
+                      "~/assets/css/font-awesome.min.css",
+                      "~/assets/css/fontgoogle.css",
+                      "~/assets/css/themify-icons.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -19,12 +32,18 @@ namespace BillApp.Web
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+            // Original Jquery Bundle
+            //bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+            //            "~/Scripts/jquery-{version}.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+            // Original Bootsrap Bundle
+            //bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+            //          "~/Scripts/bootstrap.js"));
+
+            // Original CSS bundle
+            //bundles.Add(new StyleBundle("~/Content/css").Include(
+            //          "~/Content/bootstrap.css",
+            //          "~/Content/site.css"));
         }
     }
 }

@@ -9,12 +9,12 @@ C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\bin\Debug\EntityFramework.
 C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\bin\Debug\Microsoft.AspNet.Identity.Core.xml
 C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\obj\Debug\BillApp.Domain.csprojAssemblyReference.cache
+C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\obj\Debug\BillApp.Domain.Migrations.First_Migration.resources
+C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\obj\Debug\BillApp.Domain.Migrations.UserToTables.resources
+C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\obj\Debug\BillApp.Domain.Migrations.UpdateProxieDefinition.resources
+C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\obj\Debug\BillApp.Domain.csproj.GenerateResource.cache
 C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\obj\Debug\BillApp.Domain.csproj.CoreCompileInputs.cache
 C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\obj\Debug\BillApp.Domain.csproj.CopyComplete
 C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\obj\Debug\BillApp.Domain.dll
 C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\obj\Debug\BillApp.Domain.pdb
-C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\obj\Debug\BillApp.Domain.Migrations.First_Migration.resources
-C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\obj\Debug\BillApp.Domain.csproj.GenerateResource.cache
-C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\obj\Debug\BillApp.Domain.Migrations.UserToTables.resources
-C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\obj\Debug\BillApp.Domain.Migrations.UpdateProxieDefinition.resources
-C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\obj\Debug\BillApp.Domain.csprojAssemblyReference.cache

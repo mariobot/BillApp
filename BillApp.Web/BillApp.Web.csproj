@@ -252,6 +252,8 @@
     <Content Include="assets\css\animate.min.css" />
     <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\demo.css" />
+    <Content Include="assets\css\font-awesome.min.css" />
+    <Content Include="assets\css\fontgoogle.css" />
     <Content Include="assets\css\paper-dashboard.css" />
     <Content Include="assets\css\themify-icons.css" />
     <Content Include="assets\fonts\themify.svg" />
