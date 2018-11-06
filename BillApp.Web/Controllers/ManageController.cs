@@ -63,7 +63,7 @@ namespace BillApp.Web.Controllers
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
 
-            var userId = User.Identity.GetUserId();
+            var userId = User.Identity. GetUserId();
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),

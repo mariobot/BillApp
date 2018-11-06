@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity;
 
 namespace BillApp.Web.Controllers
 {
+    [Authorize]
     public class CustomerController : Controller
     {
         private CustomerRepository _repo;
