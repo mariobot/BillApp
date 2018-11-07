@@ -1,4 +1,3 @@
-C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\ApplicationInsights.config
 C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\BillApp.Web.dll.config
 C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\BillApp.Web.dll
 C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\BillApp.Web.pdb
@@ -53,13 +52,6 @@ C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\BillApp.Domain.dll
 C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\CommonServiceLocator.dll
 C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\EntityFramework.dll
 C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\EntityFramework.SqlServer.dll
-C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\Microsoft.AI.Agent.Intercept.dll
-C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\Microsoft.AI.DependencyCollector.dll
-C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\Microsoft.AI.PerfCounterCollector.dll
-C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\Microsoft.AI.ServerTelemetryChannel.dll
-C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\Microsoft.AI.Web.dll
-C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\Microsoft.AI.WindowsServer.dll
-C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\Microsoft.ApplicationInsights.dll
 C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\Microsoft.AspNet.Identity.Core.dll
 C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\Microsoft.AspNet.Identity.Owin.dll
@@ -135,9 +127,6 @@ C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\Microsoft.Owin.Security.M
 C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\Microsoft.Owin.Security.OAuth.xml
 C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\System.Diagnostics.DiagnosticSource.xml
 C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\Microsoft.AspNet.TelemetryCorrelation.xml
-C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\Microsoft.AI.DependencyCollector.xml
-C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\Microsoft.AI.WindowsServer.xml
-C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\Microsoft.AI.Web.xml
 C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\mabotero\source\repos\BillApp\BillApp.Web\obj\Debug\BillApp.Web.csprojAssemblyReference.cache
 C:\Users\mabotero\source\repos\BillApp\BillApp.Web\obj\Debug\BillApp.Web.csproj.CoreCompileInputs.cache
