@@ -31,7 +31,7 @@ namespace BillApp.Web.Controllers
         // GET: Customer/Details/5
         public ActionResult Details(int id)
         {            
-            Customer customer = _repo.GetCustomerById(id);
+            Customer customer = _repo.GetCustomerById(User.Identity.GetUserId(),id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -64,8 +64,8 @@ namespace BillApp.Web.Controllers
 
         // GET: Customer/Edit/5
         public ActionResult Edit(int id)
-        {   
-            Customer customer = _repo.GetCustomerById(id);
+        {
+            Customer customer = _repo.GetCustomerById(User.Identity.GetUserId(), id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -91,7 +91,7 @@ namespace BillApp.Web.Controllers
         // GET: Customer/Delete/5
         public ActionResult Delete(int id)
         {   
-            Customer customer = _repo.GetCustomerById(id);
+            Customer customer = _repo.GetCustomerById(User.Identity.GetUserId(),id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -104,7 +104,7 @@ namespace BillApp.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            _repo.DeleteCustomer(id);            
+            _repo.DeleteCustomer(User.Identity.GetUserId(),id);            
             return RedirectToAction("Index");
         }
 

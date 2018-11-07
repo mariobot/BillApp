@@ -34,7 +34,7 @@ namespace BillApp.Web.Controllers
         // GET: InvoiceHeader/Details/5
         public ActionResult Details(int id)
         {            
-            InvoiceHeader invoiceHeader = _repo.GetInvoiceHeaderById(id);
+            InvoiceHeader invoiceHeader = _repo.GetInvoiceHeaderById(User.Identity.GetUserId(),id);
             if (invoiceHeader == null)
             {
                 return HttpNotFound();
@@ -67,7 +67,7 @@ namespace BillApp.Web.Controllers
         // GET: InvoiceHeader/Edit/5
         public ActionResult Edit(int id)
         {            
-            InvoiceHeader invoiceHeader = _repo.GetInvoiceHeaderById(id);
+            InvoiceHeader invoiceHeader = _repo.GetInvoiceHeaderById(User.Identity.GetUserId(),id);
             if (invoiceHeader == null)
             {
                 return HttpNotFound();
@@ -93,7 +93,7 @@ namespace BillApp.Web.Controllers
         // GET: InvoiceHeader/Delete/5
         public ActionResult Delete(int id)
         {            
-            InvoiceHeader invoiceHeader = _repo.GetInvoiceHeaderById(id);
+            InvoiceHeader invoiceHeader = _repo.GetInvoiceHeaderById(User.Identity.GetUserId(),id);
             if (invoiceHeader == null)
             {
                 return HttpNotFound();
@@ -106,7 +106,7 @@ namespace BillApp.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            _repo.DeleteInvoiceHeader(id);            
+            _repo.DeleteInvoiceHeader(User.Identity.GetUserId(),id);            
             return RedirectToAction("Index");
         }
 

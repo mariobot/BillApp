@@ -27,6 +27,6 @@ namespace BillApp.Domain
 
         public IDbSet<InvoiceItem> InvoiceItems { get; set; }
 
-        public IDbSet<Customer> Customers { get; set; }
+        public IDbSet<Customer> Customers { get; set; }        
     }
 }

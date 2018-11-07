@@ -18,9 +18,9 @@ namespace BillApp.Domain.Repository
             context.SaveChanges();
         }
 
-        public InvoiceHeader GetInvoiceHeaderById(int id)
+        public InvoiceHeader GetInvoiceHeaderById(string userid,int id)
         {
-            InvoiceHeader _invoiceH = context.InvoiceHeaders.Find(id);
+            InvoiceHeader _invoiceH = context.InvoiceHeaders.Where(x => x.AuthorId == userid && x.Id == id).FirstOrDefault();
             return _invoiceH;
         }
 
@@ -36,9 +36,9 @@ namespace BillApp.Domain.Repository
             context.SaveChanges();
         }
 
-        public void DeleteInvoiceHeader(int id)
+        public void DeleteInvoiceHeader(string userid, int id)
         {
-            InvoiceHeader _invoiceH = context.InvoiceHeaders.Find(id);
+            InvoiceHeader _invoiceH = context.InvoiceHeaders.Where(x => x.AuthorId == userid && x.Id == id).FirstOrDefault();
             context.InvoiceHeaders.Remove(_invoiceH);
             context.SaveChanges();
         }

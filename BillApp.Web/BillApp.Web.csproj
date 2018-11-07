@@ -217,6 +217,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\InvoiceHeaderController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -428,6 +429,11 @@
     <Content Include="Views\Customer\Edit.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Invoice\Create.cshtml" />
+    <Content Include="Views\Invoice\Delete.cshtml" />
+    <Content Include="Views\Invoice\Details.cshtml" />
+    <Content Include="Views\Invoice\Edit.cshtml" />
+    <Content Include="Views\Invoice\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

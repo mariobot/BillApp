@@ -17,15 +17,15 @@ namespace BillApp.Domain.Repository
             context.SaveChanges();
         }
 
-        public Customer GetCustomerById(int id)
+        public Customer GetCustomerById(string userid, int id)
         {
-            Customer _customer = context.Customers.Find(id);
+            Customer _customer = context.Customers.Where(x => x.AuthorId == userid && x.Id == id ).FirstOrDefault();
             return _customer;
         }
 
-        public List<Customer> GetCustomersByUserId(string userID)
+        public List<Customer> GetCustomersByUserId(string userid)
         {
-            List<Customer> _ListCustomers = context.Customers.Include(x => x.Author).Where(x => x.AuthorId == userID).ToList();
+            List<Customer> _ListCustomers = context.Customers.Include(x => x.Author).Where(x => x.AuthorId == userid).ToList();
             return _ListCustomers;
         }
 
@@ -35,9 +35,9 @@ namespace BillApp.Domain.Repository
             context.SaveChanges();
         }
 
-        public void DeleteCustomer(int id)
+        public void DeleteCustomer(string userid, int id)
         {
-            Customer _customer = context.Customers.Find(id);
+            Customer _customer = context.Customers.Where(x => x.AuthorId == userid && x.Id == id).FirstOrDefault();
             context.Customers.Remove(_customer);
             context.SaveChanges();
         }

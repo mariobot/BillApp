@@ -1,0 +1,90 @@
+﻿@model BillApp.Domain.Invoice
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Invoice</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Author.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.Document)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.Document)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvoiceHeader.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvoiceHeader.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sequence)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sequence)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prefix)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prefix)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvoiceNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvoiceNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tax)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

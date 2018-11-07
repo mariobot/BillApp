@@ -10,13 +10,13 @@ namespace BillApp.Domain.Interface
     {
         void AddInvoiceHeader(InvoiceHeader _invoiceH);
 
-        InvoiceHeader GetInvoiceHeaderById(int id);
+        InvoiceHeader GetInvoiceHeaderById(string userid,int id);
 
         InvoiceHeader GetInvoiceHeaderByUser(string userId);
 
         void UpdateInvoiceHeader(InvoiceHeader _invoiceH);
 
-        void DeleteInvoiceHeader(int id);
+        void DeleteInvoiceHeader(string userid, int id);
 
         void Dispose();
         

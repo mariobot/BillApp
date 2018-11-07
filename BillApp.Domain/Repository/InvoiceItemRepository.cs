@@ -17,10 +17,16 @@ namespace BillApp.Domain.Repository
             context.SaveChanges();
         }
 
-        public InvoiceItem GetInvoiceItemById(int id)
+        public InvoiceItem GetInvoiceItemById(string userid, int id)
         {
-            InvoiceItem _invoiceI = context.InvoiceItems.Find(id);
+            InvoiceItem _invoiceI = context.InvoiceItems.Include(x => x.Invoice).Where(x => x.Invoice.AuthorId == userid && x.id == id).FirstOrDefault();
             return _invoiceI;
+        }
+
+        public List<InvoiceItem> GetItemsOfInvoice(string userid, int invoiceid)
+        {
+            List<InvoiceItem> _ItemsOfInvoice = context.InvoiceItems.Where(x => x.Invoice.AuthorId == userid && x.InvoiceId == invoiceid).ToList();
+            return _ItemsOfInvoice;
         }
 
         public void UpdateInvoiceItem(InvoiceItem _invoiceI)
@@ -29,9 +35,9 @@ namespace BillApp.Domain.Repository
             context.SaveChanges();
         }
 
-        public void DeleteInvoiceItem(int id)
+        public void DeleteInvoiceItem(string userid, int id)
         {
-            InvoiceItem _invoiceI = context.InvoiceItems.Find(id);
+            InvoiceItem _invoiceI = context.InvoiceItems.Include(x => x.Invoice).Where(x => x.Invoice.AuthorId == userid && x.id == id).FirstOrDefault();
             context.InvoiceItems.Remove(_invoiceI);
             context.SaveChanges();
         }
