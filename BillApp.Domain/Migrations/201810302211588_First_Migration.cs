@@ -47,7 +47,7 @@ namespace BillApp.Domain.Migrations
                         InvoiceId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.id)
-                .ForeignKey("dbo.Invoices", t => t.InvoiceId, cascadeDelete: true)
+                .ForeignKey("dbo.Invoices", t => t.InvoiceId, cascadeDelete: false)
                 .Index(t => t.InvoiceId);
             
             CreateTable(
@@ -67,8 +67,8 @@ namespace BillApp.Domain.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.AuthorId)
-                .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: true)
-                .ForeignKey("dbo.InvoiceHeaders", t => t.InvoiceHeaderId, cascadeDelete: true)
+                .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: false)
+                .ForeignKey("dbo.InvoiceHeaders", t => t.InvoiceHeaderId, cascadeDelete: false)
                 .Index(t => t.InvoiceHeaderId)
                 .Index(t => t.CustomerId)
                 .Index(t => t.AuthorId);
