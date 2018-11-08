@@ -23,7 +23,7 @@ namespace BillApp.Domain
 
         public string Prefix { get; set; }
 
-        public string InvoiceNumber { get { return Convert.ToString(Sequence)+Prefix; } set { this.InvoiceNumber = value; } }
+        public string InvoiceNumber { get; set; }
 
         public DateTime DateCreated { get; set; }
 

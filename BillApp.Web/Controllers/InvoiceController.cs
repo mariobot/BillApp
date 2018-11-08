@@ -17,7 +17,7 @@ namespace BillApp.Web.Controllers
 
         private InvoiceRepository _repo = new InvoiceRepository();
         private CustomerRepository _repoCustomer = new CustomerRepository();
-        private InvoiceHeaderRepository _repoInvHeader = new InvoiceHeaderRepository();
+        private InvoiceHeaderRepository _repoInvHeader = new InvoiceHeaderRepository();        
 
         // GET: Invoice
         public ActionResult Index()
@@ -40,10 +40,20 @@ namespace BillApp.Web.Controllers
 
         // GET: Invoice/Create
         public ActionResult Create()
-        {            
+        {
+            Invoice _invoice = new Invoice();
+            InvoiceHeader _invoiceHeader = _repoInvHeader.GetInvoiceHeaderByUser(User.Identity.GetUserId());
+            _invoice.InvoiceHeader = _invoiceHeader;
+            _invoice.AuthorId = User.Identity.GetUserId();            
+            _invoice.DateCreated = DateTime.Now;
+            _invoice.InvoiceHeaderId = _invoiceHeader.Id;
+            _invoice.Prefix = _invoiceHeader.Prefix;
+            _invoice.Sequence = _invoiceHeader.Sequence + 1;
+            _invoice.InvoiceNumber = _invoiceHeader.Prefix + _invoiceHeader.Sequence;
+
             ViewBag.CustomerId = new SelectList(_repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()), "Id", "Document");
-            ViewBag.InvoiceHeaderId = _repoInvHeader.GetInvoiceHeaderByUser(User.Identity.GetUserId()).Id;
-            return View();
+            
+            return View(_invoice);
         }
 
         // POST: Invoice/Create
@@ -59,8 +69,7 @@ namespace BillApp.Web.Controllers
                 _repo.AddInvoice(invoice);                
                 return RedirectToAction("Index");
             }
-            ViewBag.CustomerId = new SelectList(_repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()), "Id", "Document", invoice.CustomerId);
-            ViewBag.InvoiceHeaderId = _repoInvHeader.GetInvoiceHeaderByUser(User.Identity.GetUserId()).Id;
+            ViewBag.CustomerId = new SelectList(_repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()), "Id", "Document", invoice.CustomerId);            
 
             return View(invoice);
         }
@@ -73,8 +82,7 @@ namespace BillApp.Web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CustomerId = new SelectList(_repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()), "Id", "Document", invoice.CustomerId);
-            ViewBag.InvoiceHeaderId = _repoInvHeader.GetInvoiceHeaderByUser(User.Identity.GetUserId()).Id;
+            ViewBag.CustomerId = new SelectList(_repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()), "Id", "Document", invoice.CustomerId);            
             return View(invoice);
         }
 
@@ -90,8 +98,7 @@ namespace BillApp.Web.Controllers
                 _repo.UpdateInvoice(invoice);                
                 return RedirectToAction("Index");
             }            
-            ViewBag.CustomerId = new SelectList(_repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()), "Id", "Document", invoice.CustomerId);
-            ViewBag.InvoiceHeaderId = _repoInvHeader.GetInvoiceHeaderByUser(User.Identity.GetUserId()).Id;
+            ViewBag.CustomerId = new SelectList(_repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()), "Id", "Document", invoice.CustomerId);            
             return View(invoice);
         }
 
