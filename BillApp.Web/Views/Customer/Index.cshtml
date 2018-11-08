@@ -1,63 +1,36 @@
 ﻿@model IEnumerable<BillApp.Domain.Customer>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Clientes";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Author.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Document)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SurName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Phone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Author.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Document)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SurName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>
+<div class="card">
+    <div class="header">
+        <div class="row">
+            <div class="col-lg-2">
+                <a href="@Url.Action("Create","Customer")" class="btn btn-info btn-fill btn-wd">Cear Cliente</a>
+            </div>
+            <div class="col-lg-10 text-center">
+                <h4 class="title">Clientes</h4>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 col-lg-3">
+                    <div class="clearfix">
+                        <div class="col-xs-12">
+                            <strong>@item.Name  @item.SurName </strong>
+                            <a href="@Url.Action("Edit","Customer",new { id = item.Id})"><btn class="btn btn-sm btn-success btn-icon"><i class="ti-pencil"></i></btn></a>
+                            <a href="@Url.Action("Delete","Customer",new { id = item.Id})"><btn class="btn btn-danger btn-icon"><i class="ti-close"></i></btn></a>
+                            <p> <i class="ti-email"></i> <span class="text-info"><small> @item.Email</small></span></p>
+                            <p> <i class="ti-mobile"></i> <span class="text-info"><small>@item.Phone</small></span></p>
+                        </div>                       
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

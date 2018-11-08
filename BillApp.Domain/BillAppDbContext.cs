@@ -29,13 +29,9 @@ namespace BillApp.Domain
 
         public IDbSet<Customer> Customers { get; set; }
 
+        //  I cant recomend use this method because generate conflict with Identity init context
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Invoice>()
-        //       .HasOptional(a => a.Customer)
-        //       .WithOptionalDependent()
-        //       .WillCascadeOnDelete(false);
-            
+        //{         
         //    //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         //    //modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
         //}
