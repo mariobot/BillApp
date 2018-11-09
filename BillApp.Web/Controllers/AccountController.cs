@@ -86,7 +86,7 @@ namespace BillApp.Web.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Invalido intento de login.");
                     return View(model);
             }
         }
@@ -129,7 +129,7 @@ namespace BillApp.Web.Controllers
                     return View("Lockout");
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid code.");
+                    ModelState.AddModelError("", "Codigo invalido.");
                     return View(model);
             }
         }

@@ -28,14 +28,14 @@ namespace BillApp.Web.Models
     public class SetPasswordViewModel
     {
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 4)]
+        [StringLength(100, ErrorMessage = "La {0} debe tener por lo menos {2} caracteres de largo.", MinimumLength = 4)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(Name = "Nuevo password")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Display(Name = "Confirmar nevo password")]
+        [Compare("NewPassword", ErrorMessage = "El nuevo password y la confirmacion de password no coinciden.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -43,18 +43,18 @@ namespace BillApp.Web.Models
     {
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
+        [Display(Name = "Password Actual")]
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 4)]
+        [StringLength(100, ErrorMessage = "El {0} debe tener por lo menos {2} caracteres de largo.", MinimumLength = 4)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(Name = "Nuevo password")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Display(Name = "Confirmar nuevo password")]
+        [Compare("NewPassword", ErrorMessage = "El nuevo password y la confirmacion de password no coinciden.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -62,19 +62,19 @@ namespace BillApp.Web.Models
     {
         [Required]
         [Phone]
-        [Display(Name = "Phone Number")]
+        [Display(Name = "Numero de Telefono")]
         public string Number { get; set; }
     }
 
     public class VerifyPhoneNumberViewModel
     {
         [Required]
-        [Display(Name = "Code")]
+        [Display(Name = "Codigo")]
         public string Code { get; set; }
 
         [Required]
         [Phone]
-        [Display(Name = "Phone Number")]
+        [Display(Name = "Numero de Telefono")]
         public string PhoneNumber { get; set; }
     }
 

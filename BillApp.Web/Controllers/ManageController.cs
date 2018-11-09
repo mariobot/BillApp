@@ -55,12 +55,12 @@ namespace BillApp.Web.Controllers
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                message == ManageMessageId.ChangePasswordSuccess ? "Tu password ha sido cambiado."
+                : message == ManageMessageId.SetPasswordSuccess ? "Tu password ha sido actualizado."
+                : message == ManageMessageId.SetTwoFactorSuccess ? "Tu autenticacion de dos pasos ha sido activada."
+                : message == ManageMessageId.Error ? "Ha ocurrido un error."
+                : message == ManageMessageId.AddPhoneSuccess ? "Tu telefono ha sido adicionado."
+                : message == ManageMessageId.RemovePhoneSuccess ? "Tu telefono ha sido removido."
                 : "";
 
             var userId = User.Identity. GetUserId();
@@ -123,7 +123,7 @@ namespace BillApp.Web.Controllers
                 var message = new IdentityMessage
                 {
                     Destination = model.Number,
-                    Body = "Your security code is: " + code
+                    Body = "Tu codigo es: " + code
                 };
                 await UserManager.SmsService.SendAsync(message);
             }
@@ -190,7 +190,7 @@ namespace BillApp.Web.Controllers
                 return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
             }
             // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "Failed to verify phone");
+            ModelState.AddModelError("", "Error al verificar el telefono");
             return View(model);
         }
 
@@ -281,8 +281,8 @@ namespace BillApp.Web.Controllers
         public async Task<ActionResult> ManageLogins(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
-                : message == ManageMessageId.Error ? "An error has occurred."
+                message == ManageMessageId.RemoveLoginSuccess ? "El login externo ha sido removido."
+                : message == ManageMessageId.Error ? "Un error ha ocurrido."
                 : "";
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             if (user == null)

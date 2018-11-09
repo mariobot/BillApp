@@ -434,6 +434,7 @@
     <Content Include="Views\Invoice\Details.cshtml" />
     <Content Include="Views\Invoice\Edit.cshtml" />
     <Content Include="Views\Invoice\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutClear.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
