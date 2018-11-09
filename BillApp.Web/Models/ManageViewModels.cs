@@ -27,7 +27,7 @@ namespace BillApp.Web.Models
 
     public class SetPasswordViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Campo requerido")]
         [StringLength(100, ErrorMessage = "La {0} debe tener por lo menos {2} caracteres de largo.", MinimumLength = 4)]
         [DataType(DataType.Password)]
         [Display(Name = "Nuevo password")]
@@ -41,12 +41,12 @@ namespace BillApp.Web.Models
 
     public class ChangePasswordViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Campo requerido")]
         [DataType(DataType.Password)]
         [Display(Name = "Password Actual")]
         public string OldPassword { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Campo requerido")]
         [StringLength(100, ErrorMessage = "El {0} debe tener por lo menos {2} caracteres de largo.", MinimumLength = 4)]
         [DataType(DataType.Password)]
         [Display(Name = "Nuevo password")]
@@ -60,20 +60,20 @@ namespace BillApp.Web.Models
 
     public class AddPhoneNumberViewModel
     {
-        [Required]
-        [Phone]
+        [Required(ErrorMessage = "Campo requerido")]
+        [Phone(ErrorMessage ="No es un numero de telefono")]
         [Display(Name = "Numero de Telefono")]
         public string Number { get; set; }
     }
 
     public class VerifyPhoneNumberViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Campo requerido")]
         [Display(Name = "Codigo")]
         public string Code { get; set; }
 
-        [Required]
-        [Phone]
+        [Required(ErrorMessage = "Campo requerido")]
+        [Phone(ErrorMessage = "No es un numero de telefono")]
         [Display(Name = "Numero de Telefono")]
         public string PhoneNumber { get; set; }
     }
