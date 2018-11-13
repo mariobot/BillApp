@@ -1,75 +1,80 @@
-﻿@model BillApp.Domain.Invoice
+﻿@model BillApp.Web.Models.InvoiceViewModels
 
 @{
     ViewBag.Title = "Create";
+
+    AjaxOptions options = new AjaxOptions();
+    options.HttpMethod = "POST";
+    options.InsertionMode = InsertionMode.InsertBefore;
+    options.UpdateTargetId = "invoiceItem";
+    options.Url = "~/Invoice/AddLine";
 }
 
 <h2>Create</h2>
 
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Invoice</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.InvoiceHeaderId)
+        @Html.HiddenFor(model => model.Invoice.InvoiceHeaderId)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CustomerId, "CustomerId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Invoice.CustomerId, "CustomerId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("CustomerId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CustomerId, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Invoice.CustomerId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Sequence, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Invoice.Sequence, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Sequence, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Sequence, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Invoice.Sequence, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Invoice.Sequence, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Prefix, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Invoice.Prefix, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Prefix, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Prefix, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Invoice.Prefix, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Invoice.Prefix, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.InvoiceNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Invoice.InvoiceNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.InvoiceNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.InvoiceNumber, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Invoice.InvoiceNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Invoice.InvoiceNumber, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DateCreated, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Invoice.DateCreated, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DateCreated, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DateCreated, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Invoice.DateCreated, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Invoice.DateCreated, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Invoice.Total, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Invoice.Total, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Invoice.Total, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Tax, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Invoice.Tax, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Tax, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Tax, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Invoice.Tax, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Invoice.Tax, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -81,10 +86,42 @@
     </div>
 }
 
+<div id="invoiceItem" class="card">
+    @using (Ajax.BeginForm("AddLine",options))
+    {
+        @Html.AntiForgeryToken()
+    <div class="form-group">
+        <div class="col-md-3">
+            @Html.EditorFor(model => model.InvoiceItem.item, new { htmlAttributes = new { @class = "form-control", @placeholder = "Articulo" } })
+            @Html.ValidationMessageFor(model => model.InvoiceItem.item, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-1">
+            @Html.EditorFor(model => model.InvoiceItem.Quanty, new { htmlAttributes = new { @class = "form-control", @placeholder = "Unidades" } })
+            @Html.ValidationMessageFor(model => model.InvoiceItem.Quanty, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-2">
+            @Html.EditorFor(model => model.InvoiceItem.ValueUnit, new { htmlAttributes = new { @class = "form-control", @placeholder = "Valor Unidad" } })
+            @Html.ValidationMessageFor(model => model.InvoiceItem.ValueUnit, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-2">
+            @Html.EditorFor(model => model.InvoiceItem.ValueTotal, new { htmlAttributes = new { @class = "form-control", @placeholder = "Valor Total" } })
+            @Html.ValidationMessageFor(model => model.InvoiceItem.ValueTotal, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-3">
+            <input type="submit" value="Adicionar Linea" class="btn btn-default" />
+        </div>
+    </div>
+    }
+
+
+</div>
+
+
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/ajax")
 }

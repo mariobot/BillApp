@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using BillApp.Domain;
 using BillApp.Domain.Repository;
 using Microsoft.AspNet.Identity;
+using BillApp.Web.Models;
+using System.Runtime.Remoting.Contexts;
 
 namespace BillApp.Web.Controllers
 {
@@ -18,7 +20,8 @@ namespace BillApp.Web.Controllers
 
         private InvoiceRepository _repo = new InvoiceRepository();
         private CustomerRepository _repoCustomer = new CustomerRepository();
-        private InvoiceHeaderRepository _repoInvHeader = new InvoiceHeaderRepository();        
+        private InvoiceHeaderRepository _repoInvHeader = new InvoiceHeaderRepository();
+        private InvoiceItemRepository _repoInvItem = new InvoiceItemRepository();
 
         // GET: Invoice
         public ActionResult Index()
@@ -53,8 +56,11 @@ namespace BillApp.Web.Controllers
             _invoice.InvoiceNumber = _invoiceHeader.Prefix + _invoiceHeader.Sequence;
 
             ViewBag.CustomerId = new SelectList(_repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()), "Id", "Document");
-            
-            return View(_invoice);
+
+            InvoiceViewModels invoiceVM = new InvoiceViewModels();
+            invoiceVM.Invoice = _invoice;
+
+            return View(invoiceVM);
         }
 
         // POST: Invoice/Create
@@ -62,17 +68,19 @@ namespace BillApp.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,InvoiceHeaderId,CustomerId,AuthorId,Sequence,Prefix,InvoiceNumber,DateCreated,Total,Tax")] Invoice invoice)
+        public ActionResult Create(InvoiceViewModels invoiceVM)
         {
             if (ModelState.IsValid)
-            {
-                invoice.AuthorId = User.Identity.GetUserId();
-                _repo.AddInvoice(invoice);                
+            {                
+                invoiceVM.Invoice.CustomerId = Convert.ToInt32(Request.Form["CustomerId"]);
+                invoiceVM.Invoice.AuthorId = User.Identity.GetUserId();
+                _repo.AddInvoice(invoiceVM.Invoice);
+                ViewBag.InvoiceId = invoiceVM.Invoice.Id;
                 return RedirectToAction("Index");
             }
-            ViewBag.CustomerId = new SelectList(_repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()), "Id", "Document", invoice.CustomerId);            
+            ViewBag.CustomerId = new SelectList(_repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()), "Id", "Document", invoiceVM.Invoice.CustomerId);            
 
-            return View(invoice);
+            return View(invoiceVM);
         }
 
         // GET: Invoice/Edit/5
@@ -121,6 +129,14 @@ namespace BillApp.Web.Controllers
         {            
             _repo.DeleteInvoice(User.Identity.GetUserId(),id);         
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult AddLine(InvoiceViewModels invoiceVM)
+        {
+            invoiceVM.InvoiceItem.InvoiceId = ViewBag.InvoiceId;
+            _repoInvItem.AddInvoiceItem(invoiceVM.InvoiceItem);
+            return View();
         }
 
         protected override void Dispose(bool disposing)
