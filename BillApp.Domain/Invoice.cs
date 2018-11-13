@@ -27,7 +27,7 @@ namespace BillApp.Domain
         public string InvoiceNumber { get; set; }
 
         //[DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DateCreated { get; set; }
 
         public float Total { get; set; }

@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using BillApp.Domain;
+﻿using BillApp.Domain;
 using BillApp.Domain.Repository;
-using Microsoft.AspNet.Identity;
 using BillApp.Web.Models;
-using System.Runtime.Remoting.Contexts;
+using Microsoft.AspNet.Identity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace BillApp.Web.Controllers
 {
@@ -40,27 +35,48 @@ namespace BillApp.Web.Controllers
                 return HttpNotFound();
             }
             return View(invoice);
-        }
+        }        
 
         // GET: Invoice/Create
         public ActionResult Create()
         {
+            ValidateInitConfig();
+
             Invoice _invoice = new Invoice();
             InvoiceHeader _invoiceHeader = _repoInvHeader.GetInvoiceHeaderByUser(User.Identity.GetUserId());
             _invoice.InvoiceHeader = _invoiceHeader;
-            _invoice.AuthorId = User.Identity.GetUserId();            
+            _invoice.AuthorId = User.Identity.GetUserId();
             _invoice.DateCreated = DateTime.Now;
             _invoice.InvoiceHeaderId = _invoiceHeader.Id;
             _invoice.Prefix = _invoiceHeader.Prefix;
             _invoice.Sequence = _invoiceHeader.Sequence + 1;
             _invoice.InvoiceNumber = _invoiceHeader.Prefix + _invoiceHeader.Sequence;
+            _invoice.CustomerId = _repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()).FirstOrDefault().Id;
 
-            ViewBag.CustomerId = new SelectList(_repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()), "Id", "Document");
+            _repo.AddInvoice(_invoice);
+
+            ViewBag.InvoiceId = _invoice.Id;
 
             InvoiceViewModels invoiceVM = new InvoiceViewModels();
+            invoiceVM.InvoiceItems = new List<InvoiceItem>();
             invoiceVM.Invoice = _invoice;
 
             return View(invoiceVM);
+        }
+
+        private ActionResult ValidateInitConfig()
+        {
+            InvoiceHeader _invoiceH = _repoInvHeader.GetInvoiceHeaderByUser(User.Identity.GetUserId());
+
+            if (_invoiceH == null)
+                return RedirectToAction("Create", "InvoiceHeader");
+
+            Customer _customer = _repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()).FirstOrDefault();
+
+            if (_customer == null)
+                return RedirectToAction("Create", "Customer");
+
+            return null;
         }
 
         // POST: Invoice/Create
@@ -74,11 +90,12 @@ namespace BillApp.Web.Controllers
             {                
                 invoiceVM.Invoice.CustomerId = Convert.ToInt32(Request.Form["CustomerId"]);
                 invoiceVM.Invoice.AuthorId = User.Identity.GetUserId();
-                _repo.AddInvoice(invoiceVM.Invoice);
+                //_repo.AddInvoice(invoiceVM.Invoice);
                 ViewBag.InvoiceId = invoiceVM.Invoice.Id;
                 return RedirectToAction("Index");
             }
-            ViewBag.CustomerId = new SelectList(_repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()), "Id", "Document", invoiceVM.Invoice.CustomerId);            
+
+            //ViewBag.CustomerId = new SelectList(_repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()), "Id", "Document", invoiceVM.Invoice.CustomerId);            
 
             return View(invoiceVM);
         }
@@ -134,9 +151,10 @@ namespace BillApp.Web.Controllers
         [HttpPost]
         public ActionResult AddLine(InvoiceViewModels invoiceVM)
         {
-            invoiceVM.InvoiceItem.InvoiceId = ViewBag.InvoiceId;
+            invoiceVM.InvoiceItem.InvoiceId = invoiceVM.Invoice.Id;
             _repoInvItem.AddInvoiceItem(invoiceVM.InvoiceItem);
-            return View();
+            invoiceVM.InvoiceItems = _repoInvItem.GetItemsOfInvoice(User.Identity.GetUserId(), invoiceVM.Invoice.Id);
+            return PartialView("_InvItems", invoiceVM.InvoiceItems);
         }
 
         protected override void Dispose(bool disposing)

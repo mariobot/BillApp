@@ -12,6 +12,7 @@ namespace BillApp.Domain.Repository
         private BillAppDbContext context = new BillAppDbContext();
 
         public void AddInvoice(Invoice _invoice) {
+            _invoice.InvoiceHeader = null;
             context.Invoices.Add(_invoice);
             context.SaveChanges();
         }
