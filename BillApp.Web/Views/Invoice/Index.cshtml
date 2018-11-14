@@ -1,81 +1,76 @@
 ﻿@model IEnumerable<BillApp.Domain.Invoice>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lista de Facturas";    
 }
-
-<h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear Factura", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Author.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Customer.Document)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InvoiceHeader.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sequence)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Prefix)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InvoiceNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateCreated)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Total)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tax)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Author.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Customer.Document)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InvoiceHeader.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sequence)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Prefix)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InvoiceNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateCreated)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Total)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tax)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+<div class="card">
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-responsive table-condensed">
+                <tr>
+                    <th>
+                        Cliente
+                    </th>
+                    <th>
+                        Numero Factura
+                    </th>
+                    <th>
+                        Fecha
+                    </th>
+                    <th>
+                        Nº Articulos
+                    </th>
+                    <th>
+                        Total
+                    </th>                    
+                    <th>
 
-</table>
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    float sum = 0;
+                    float count = 0;
+                    string name = item.Customer.Name + item.Customer.SurName;
+                    if (item.InvoiceItems != null)
+                    {
+                        sum = item.InvoiceItems.Sum(x => x.Quanty * x.ValueUnit);
+                        count = item.InvoiceItems.Sum(x => x.Quanty);
+                    }
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InvoiceNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateCreated)
+                        </td>
+                        <td>
+                            @count
+                        </td>
+                        <td>
+                            @sum
+                        </td>                        
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+        </div>
+    </div>
+</div>
+
+

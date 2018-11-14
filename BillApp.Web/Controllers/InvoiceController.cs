@@ -21,8 +21,8 @@ namespace BillApp.Web.Controllers
         // GET: Invoice
         public ActionResult Index()
         {
-            var invoices = _repo.GetInvoicesByUserId(User.Identity.GetUserId());
-            return View(invoices.ToList());
+            var invoices = _repo.GetInvoicesByUserId(User.Identity.GetUserId());            
+            return View(invoices);
         }
 
         // GET: Invoice/Details/5
@@ -77,27 +77,6 @@ namespace BillApp.Web.Controllers
                 return RedirectToAction("Create", "Customer");
 
             return null;
-        }
-
-        // POST: Invoice/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(InvoiceViewModels invoiceVM)
-        {
-            if (ModelState.IsValid)
-            {
-                invoiceVM.Invoice.CustomerId = Convert.ToInt32(Request.Form["CustomerId"]);
-                invoiceVM.Invoice.AuthorId = User.Identity.GetUserId();
-                //_repo.AddInvoice(invoiceVM.Invoice);
-                ViewBag.InvoiceId = invoiceVM.Invoice.Id;
-                return RedirectToAction("Index");
-            }
-
-            //ViewBag.CustomerId = new SelectList(_repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()), "Id", "Document", invoiceVM.Invoice.CustomerId);            
-
-            return View(invoiceVM);
         }
 
         // GET: Invoice/Edit/5

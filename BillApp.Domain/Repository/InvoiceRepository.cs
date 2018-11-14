@@ -29,7 +29,7 @@ namespace BillApp.Domain.Repository
 
         public List<Invoice> GetInvoicesByUserId(string userId) {
             List<Invoice> _listInvoices = context.Invoices.Where(x => x.AuthorId == userId)
-                .Include(x => x.Customer).Include(x => x.InvoiceHeader).ToList();
+                .Include(x => x.Customer).Include(x => x.InvoiceHeader).Include(x => x.InvoiceItems ).ToList();
             return _listInvoices;
         }
 

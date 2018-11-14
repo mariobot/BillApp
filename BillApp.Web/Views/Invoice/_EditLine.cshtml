@@ -7,7 +7,6 @@
     options.UpdateTargetId = "invoiceItem";
 }
 
-
 <style>
     .form-control:focus {
         border-color: #ff0000;
@@ -26,7 +25,7 @@
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.InvoiceId)
     @Html.HiddenFor(model => model.id)
-    <div class="" style="background-color:brown">
+    <div class="">
         <div class="form-group">
             <div class="col-lg-offset-1 col-md-3">
                 @Html.EditorFor(model => model.item, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Articulo" } })
