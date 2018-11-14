@@ -13,7 +13,7 @@ namespace BillApp.Domain.Repository
 
         public void AddInvoiceItem(InvoiceItem _invoiceI)
         {
-            context.InvoiceItems.Add(_invoiceI);
+            context.InvoiceItems.Add(_invoiceI);            
             context.SaveChanges();
         }
 
