@@ -158,10 +158,25 @@ namespace BillApp.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteLine(int id,int invoiceid)
+        public ActionResult DeleteLine(int id, int invoiceid)
         {
-            _repoInvItem.DeleteInvoiceItem(User.Identity.GetUserId(), id );
+            _repoInvItem.DeleteInvoiceItem(User.Identity.GetUserId(), id);
             List<InvoiceItem> _items = _repoInvItem.GetItemsOfInvoice(User.Identity.GetUserId(), invoiceid);
+            return PartialView("_InvItems", _items);
+        }
+
+        [HttpPost]
+        public ActionResult LoadEditLine(int id)
+        {
+            InvoiceItem _invoiceI = _repoInvItem.GetInvoiceItemById(User.Identity.GetUserId(), id);
+            return PartialView("_EditLine", _invoiceI);
+        }
+
+        [HttpPost]
+        public ActionResult EditLine(InvoiceItem _invoiceItem)
+        {
+            _repoInvItem.UpdateInvoiceItem(_invoiceItem);                        
+            List<InvoiceItem> _items = _repoInvItem.GetItemsOfInvoice(User.Identity.GetUserId(), _invoiceItem.InvoiceId);
             return PartialView("_InvItems", _items);
         }
 

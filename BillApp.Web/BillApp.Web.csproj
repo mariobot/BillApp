@@ -456,6 +456,7 @@
     <Content Include="Views\Invoice\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutClear.cshtml" />
     <Content Include="Views\Invoice\_InvItems.cshtml" />
+    <Content Include="Views\Invoice\_EditLine.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
