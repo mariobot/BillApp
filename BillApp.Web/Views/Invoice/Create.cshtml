@@ -9,114 +9,77 @@
     options.UpdateTargetId = "invoiceItem";    
 }
 
-<h2>Create</h2>
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Invoice</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Invoice.InvoiceHeaderId)
-
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.Invoice.CustomerId, "CustomerId", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("CustomerId", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Invoice.CustomerId, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Invoice.Sequence, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Invoice.Sequence, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Invoice.Sequence, "", new { @class = "text-danger" })
+<div class="card">
+    <div class="header">
+        <h4>Factura</h4>
+    </div>
+    <div class="row">
+        <div class="col-lg-offset-1 col-lg-5">
+            <h5>Numero: @Model.Invoice.InvoiceNumber</h5>
+        </div>
+        <div class="col-lg-6">
+            <h5>Fecha: @Model.Invoice.DateCreated.ToShortDateString() @Model.Invoice.DateCreated.ToShortTimeString()</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-offset-1 col-lg-5">
+            <h5>Identificador Unico: @Model.Invoice.InvoiceHeader.Identification</h5>
+        </div>
+        <div class="col-lg-6">
+            <h5>Nombre: @Model.Invoice.InvoiceHeader.Name</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-offset-1 col-lg-5">
+            <h5>Direccion: @Model.Invoice.InvoiceHeader.Adress</h5>
+        </div>
+        <div class="col-lg-6">
+            <h5>Telefono: @Model.Invoice.InvoiceHeader.Phone</h5>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="invoiceItem" class="success">
+                @Html.Partial("_InvItems", Model.InvoiceItems)
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Invoice.Prefix, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Invoice.Prefix, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Invoice.Prefix, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Invoice.InvoiceNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Invoice.InvoiceNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Invoice.InvoiceNumber, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Invoice.DateCreated, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Invoice.DateCreated, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Invoice.DateCreated, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Invoice.Total, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Invoice.Total, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Invoice.Total, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Invoice.Tax, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Invoice.Tax, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Invoice.Tax, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+        <div class="col-lg-12">
+            <div class="card">
+                @using (Ajax.BeginForm("AddLine", options))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.Invoice.Id)
+                    <div class="form-group">
+                        <div class="col-lg-offset-1 col-md-3">
+                            @Html.EditorFor(model => model.InvoiceItem.item, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Articulo" } })
+                            @Html.ValidationMessageFor(model => model.InvoiceItem.item, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-1">
+                            @Html.EditorFor(model => model.InvoiceItem.Quanty, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Unidades" } })
+                            @Html.ValidationMessageFor(model => model.InvoiceItem.Quanty, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.InvoiceItem.ValueUnit, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Valor Unidad" } })
+                            @Html.ValidationMessageFor(model => model.InvoiceItem.ValueUnit, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.InvoiceItem.ValueTotal, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Valor Total" } })
+                            @Html.ValidationMessageFor(model => model.InvoiceItem.ValueTotal, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-3">
+                            <input type="submit" value="Adicionar Linea" class="btn btn-default" />
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     </div>
-}
-
-<div id="invoiceItem">
-    @Html.Partial("_InvItems",Model.InvoiceItems)
 </div>
 
-<div class="card">
-    @using (Ajax.BeginForm("AddLine", options))
-    {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.Invoice.Id)
-        <div class="form-group">
-            <div class="col-md-3">
-                @Html.EditorFor(model => model.InvoiceItem.item, new { htmlAttributes = new { @class = "form-control", @placeholder = "Articulo" } })
-                @Html.ValidationMessageFor(model => model.InvoiceItem.item, "", new { @class = "text-danger" })
-            </div>
-            <div class="col-md-1">
-                @Html.EditorFor(model => model.InvoiceItem.Quanty, new { htmlAttributes = new { @class = "form-control", @placeholder = "Unidades" } })
-                @Html.ValidationMessageFor(model => model.InvoiceItem.Quanty, "", new { @class = "text-danger" })
-            </div>
-            <div class="col-md-2">
-                @Html.EditorFor(model => model.InvoiceItem.ValueUnit, new { htmlAttributes = new { @class = "form-control", @placeholder = "Valor Unidad" } })
-                @Html.ValidationMessageFor(model => model.InvoiceItem.ValueUnit, "", new { @class = "text-danger" })
-            </div>
-            <div class="col-md-2">
-                @Html.EditorFor(model => model.InvoiceItem.ValueTotal, new { htmlAttributes = new { @class = "form-control", @placeholder = "Valor Total" } })
-                @Html.ValidationMessageFor(model => model.InvoiceItem.ValueTotal, "", new { @class = "text-danger" })
-            </div>
-            <div class="col-md-3">
-                <input type="submit" value="Adicionar Linea" class="btn btn-default" />
-            </div>
-        </div>
-    }
-</div>
+
+
+
 
 <div>
     @Html.ActionLink("Back to List", "Index")

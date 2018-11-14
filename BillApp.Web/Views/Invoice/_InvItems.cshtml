@@ -1,18 +1,27 @@
 ﻿@model List<BillApp.Domain.InvoiceItem>
 
+@{
+    ViewBag.Title = "Create";
+
+    AjaxOptions options = new AjaxOptions();
+    options.HttpMethod = "POST";
+    options.InsertionMode = InsertionMode.Replace;
+    options.UpdateTargetId = "invoiceItem";
+}
+
 @if (Model != null)
 {
     foreach (var item in Model)
     {
-<div class="row">
-    <div class="form-group">
-        <div class="col-lg-3"><text class="form-control">@item.item</text></div>
-        <div class="col-lg-1"><text class="form-control">@item.Quanty</text></div>
-        <div class="col-lg-1"><text class="form-control">@item.ValueUnit</text></div>
-        <div class="col-lg-2"><text class="form-control">@item.ValueTotal</text></div>
-        <div class="col-lg-2">Edit Delete</div>
-    </div>
-</div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-lg-offset-1 col-md-3"><text class="form-control border-input">@item.item</text></div>
+                <div class="col-md-1"><text class="form-control border-input">@item.Quanty</text></div>
+                <div class="col-md-2"><text class="form-control border-input">@item.ValueUnit</text></div>
+                <div class="col-md-2"><text class="form-control border-input">@item.ValueTotal</text></div>
+                <div class="col-md-3">@Ajax.ActionLink("Eliminar","DeleteLine",new { id = item.id , invoiceid = item.InvoiceId },options) Edit</div>
+            </div>
+        </div>
 
     }
 }

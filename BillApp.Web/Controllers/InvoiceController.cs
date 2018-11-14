@@ -11,7 +11,7 @@ namespace BillApp.Web.Controllers
 {
     [Authorize]
     public class InvoiceController : Controller
-    {        
+    {
 
         private InvoiceRepository _repo = new InvoiceRepository();
         private CustomerRepository _repoCustomer = new CustomerRepository();
@@ -28,14 +28,14 @@ namespace BillApp.Web.Controllers
         // GET: Invoice/Details/5
         public ActionResult Details(int id)
         {
-            
-            Invoice invoice = _repo.GetInvoiceById(User.Identity.GetUserId(),id);
+
+            Invoice invoice = _repo.GetInvoiceById(User.Identity.GetUserId(), id);
             if (invoice == null)
             {
                 return HttpNotFound();
             }
             return View(invoice);
-        }        
+        }
 
         // GET: Invoice/Create
         public ActionResult Create()
@@ -50,7 +50,7 @@ namespace BillApp.Web.Controllers
             _invoice.InvoiceHeaderId = _invoiceHeader.Id;
             _invoice.Prefix = _invoiceHeader.Prefix;
             _invoice.Sequence = _invoiceHeader.Sequence + 1;
-            _invoice.InvoiceNumber = _invoiceHeader.Prefix + _invoiceHeader.Sequence;
+            _invoice.InvoiceNumber = _invoice.Prefix + _invoice.Sequence;
             _invoice.CustomerId = _repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()).FirstOrDefault().Id;
 
             _repo.AddInvoice(_invoice);
@@ -87,7 +87,7 @@ namespace BillApp.Web.Controllers
         public ActionResult Create(InvoiceViewModels invoiceVM)
         {
             if (ModelState.IsValid)
-            {                
+            {
                 invoiceVM.Invoice.CustomerId = Convert.ToInt32(Request.Form["CustomerId"]);
                 invoiceVM.Invoice.AuthorId = User.Identity.GetUserId();
                 //_repo.AddInvoice(invoiceVM.Invoice);
@@ -102,13 +102,13 @@ namespace BillApp.Web.Controllers
 
         // GET: Invoice/Edit/5
         public ActionResult Edit(int id)
-        {            
-            Invoice invoice = _repo.GetInvoiceById(User.Identity.GetUserId(),id);
+        {
+            Invoice invoice = _repo.GetInvoiceById(User.Identity.GetUserId(), id);
             if (invoice == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CustomerId = new SelectList(_repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()), "Id", "Document", invoice.CustomerId);            
+            ViewBag.CustomerId = new SelectList(_repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()), "Id", "Document", invoice.CustomerId);
             return View(invoice);
         }
 
@@ -121,17 +121,17 @@ namespace BillApp.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _repo.UpdateInvoice(invoice);                
+                _repo.UpdateInvoice(invoice);
                 return RedirectToAction("Index");
-            }            
-            ViewBag.CustomerId = new SelectList(_repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()), "Id", "Document", invoice.CustomerId);            
+            }
+            ViewBag.CustomerId = new SelectList(_repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()), "Id", "Document", invoice.CustomerId);
             return View(invoice);
         }
 
         // GET: Invoice/Delete/5
         public ActionResult Delete(int id)
-        {   
-            Invoice invoice = _repo.GetInvoiceById(User.Identity.GetUserId(),id);
+        {
+            Invoice invoice = _repo.GetInvoiceById(User.Identity.GetUserId(), id);
             if (invoice == null)
             {
                 return HttpNotFound();
@@ -143,8 +143,8 @@ namespace BillApp.Web.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
-        {            
-            _repo.DeleteInvoice(User.Identity.GetUserId(),id);         
+        {
+            _repo.DeleteInvoice(User.Identity.GetUserId(), id);
             return RedirectToAction("Index");
         }
 
@@ -155,6 +155,14 @@ namespace BillApp.Web.Controllers
             _repoInvItem.AddInvoiceItem(invoiceVM.InvoiceItem);
             invoiceVM.InvoiceItems = _repoInvItem.GetItemsOfInvoice(User.Identity.GetUserId(), invoiceVM.Invoice.Id);
             return PartialView("_InvItems", invoiceVM.InvoiceItems);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteLine(int id,int invoiceid)
+        {
+            _repoInvItem.DeleteInvoiceItem(User.Identity.GetUserId(), id );
+            List<InvoiceItem> _items = _repoInvItem.GetItemsOfInvoice(User.Identity.GetUserId(), invoiceid);
+            return PartialView("_InvItems", _items);
         }
 
         protected override void Dispose(bool disposing)
