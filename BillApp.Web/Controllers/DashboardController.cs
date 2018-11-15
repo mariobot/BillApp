@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using BillApp.Domain.Repository;
+﻿using BillApp.Domain.Repository;
 using BillApp.Web.Models;
 using Microsoft.AspNet.Identity;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace BillApp.Web.Controllers
 {
@@ -21,7 +17,9 @@ namespace BillApp.Web.Controllers
             DashboardViewModels dashVM = new DashboardViewModels()
             {
                 NumInvoices = await _repoDash.GetNumInvoices(User.Identity.GetUserId()),
-                TotalInvoices = await _repoDash.GetTotalInvoices(User.Identity.GetUserId())
+                TotalInvoices = await _repoDash.GetTotalInvoices(User.Identity.GetUserId()),
+                NumCustomers = await _repoDash.GetTotalCustomers(User.Identity.GetUserId()),
+                NumOfArticles = await _repoDash.GetNumOfArticles(User.Identity.GetUserId())
             };
             return View(dashVM);
         }

@@ -9,5 +9,7 @@ namespace BillApp.Web.Models
     {
         public int NumInvoices { get; set; }
         public float TotalInvoices { get; set; }
+        public int NumCustomers { get; set; }
+        public float NumOfArticles { get; set; }
     }
 }

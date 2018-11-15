@@ -32,15 +32,18 @@
                     <div class="card">
                         <div class="content">
                             <div class="row">
-                                <div class="col-xs-5">
+                                <div class="col-xs-4">
                                     <div class="icon-big icon-success text-center">
                                         <i class="ti-wallet"></i>
                                     </div>
                                 </div>
-                                <div class="col-xs-7">
+                                <div class="col-xs-8">
                                     <div class="numbers">
-                                        <p>Total Facturado</p>
-                                        @Model.TotalInvoices
+                                        <p>Total</p>
+                                        <p>Facturado</p>
+                                        <span>@String.Format("{0:C0}", Model.TotalInvoices)</span>
+                                        <br />
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -59,13 +62,13 @@
                             <div class="row">
                                 <div class="col-xs-5">
                                     <div class="icon-big icon-danger text-center">
-                                        <i class="ti-pulse"></i>
+                                        <i class="ti-user"></i>
                                     </div>
                                 </div>
                                 <div class="col-xs-7">
                                     <div class="numbers">
-                                        <p>Errors</p>
-                                        23
+                                        <p>Total de clientes</p>
+                                        @Model.NumCustomers
                                     </div>
                                 </div>
                             </div>
@@ -84,13 +87,13 @@
                             <div class="row">
                                 <div class="col-xs-5">
                                     <div class="icon-big icon-info text-center">
-                                        <i class="ti-twitter-alt"></i>
+                                        <i class="ti-book"></i>
                                     </div>
                                 </div>
                                 <div class="col-xs-7">
                                     <div class="numbers">
-                                        <p>Followers</p>
-                                        +45
+                                        <p>Numero de Articulos</p>
+                                        @Model.NumOfArticles
                                     </div>
                                 </div>
                             </div>
