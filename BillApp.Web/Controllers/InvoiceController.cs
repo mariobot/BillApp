@@ -83,12 +83,13 @@ namespace BillApp.Web.Controllers
         public ActionResult Edit(int id)
         {
             Invoice invoice = _repo.GetInvoiceById(User.Identity.GetUserId(), id);
+            InvoiceViewModels invoiceVM = new InvoiceViewModels() { Invoice = invoice };
             if (invoice == null)
             {
                 return HttpNotFound();
             }
             ViewBag.CustomerId = new SelectList(_repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()), "Id", "Document", invoice.CustomerId);
-            return View(invoice);
+            return View(invoiceVM);
         }
 
         // POST: Invoice/Edit/5

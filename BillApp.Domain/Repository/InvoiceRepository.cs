@@ -23,7 +23,10 @@ namespace BillApp.Domain.Repository
         }
 
         public Invoice GetInvoiceById(string userid, int id) {
-            Invoice _invoice = context.Invoices.Where(x => x.AuthorId == userid && x.Id == id).FirstOrDefault();
+            Invoice _invoice = context.Invoices.Where(x => x.AuthorId == userid && x.Id == id)
+                                                .Include(x => x.InvoiceHeader)
+                                                .Include(x => x.InvoiceItems)
+                                                .FirstOrDefault();
             return _invoice;
         }
 

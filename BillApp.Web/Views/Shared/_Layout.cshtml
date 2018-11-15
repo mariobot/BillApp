@@ -105,9 +105,9 @@
                         <ul class="nav navbar-nav navbar-right">
                             @Html.Partial("_LoginPartial")
                             <li>
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <a href="@Url.Action("Index","Dashboard")" class="dropdown-toggle">
                                     <i class="ti-panel"></i>
-                                    <p>Stats</p>
+                                    <p>Dashboard</p>
                                 </a>
                             </li>
                             <li class="dropdown">
@@ -125,10 +125,16 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="ti-settings"></i>
-                                    <p>Settings</p>
+                                    <p>Configuracion</p>
+                                    <b class="caret"></b>
                                 </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="@Url.Action("Create","InvoiceHeader")">1 - Encabezado Factura</a></li>
+                                    <li><a href="@Url.Action("Create","Customer")">2 - Adiciona Clientes</a></li>
+                                    <li><a href="@Url.Action("Create","Invoice")">3 - Crea Factura</a></li>                                    
+                                </ul>
                             </li>
                         </ul>
                     </div>
