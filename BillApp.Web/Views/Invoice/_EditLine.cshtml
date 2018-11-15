@@ -4,7 +4,7 @@
     AjaxOptions options = new AjaxOptions();
     options.HttpMethod = "POST";
     options.InsertionMode = InsertionMode.Replace;
-    options.UpdateTargetId = "invoiceItem";
+    options.UpdateTargetId = "invoiceItem";    
 }
 
 <style>
@@ -19,6 +19,10 @@
         -webkit-box-shadow: none;
     }
 </style>
+
+@* Con esta adicion funciona la validacion dentro del formulario *@
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
 @using (Ajax.BeginForm("EditLine", options))
 {
@@ -50,7 +54,4 @@
     </div>
 }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
 
