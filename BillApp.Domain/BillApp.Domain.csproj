@@ -78,6 +78,7 @@
     <Compile Include="Repository\CustomerRepository.cs" />
     <Compile Include="Repository\InvoiceHeaderRepository.cs" />
     <Compile Include="Repository\InvoiceItemRepository.cs" />
+    <Compile Include="Repository\DashboardRepository.cs" />
     <Compile Include="Repository\InvoiceRepository.cs" />
   </ItemGroup>
   <ItemGroup>
