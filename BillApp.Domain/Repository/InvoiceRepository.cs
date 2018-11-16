@@ -22,11 +22,13 @@ namespace BillApp.Domain.Repository
             context.SaveChanges();
         }
 
-        public Invoice GetInvoiceById(string userid, int id) {
+        public Invoice GetInvoiceById(string userid, int id) {            
             Invoice _invoice = context.Invoices.Where(x => x.AuthorId == userid && x.Id == id)
                                                 .Include(x => x.InvoiceHeader)
                                                 .Include(x => x.InvoiceItems)
                                                 .FirstOrDefault();
+            _invoice.Total = _invoice.InvoiceItems.Sum(x => x.Quanty * x.ValueTotal);
+            _invoice.Tax = _invoice.InvoiceItems.Sum(x => x.Quanty * x.ValueTotal) * 0.19;
             return _invoice;
         }
 

@@ -17,9 +17,9 @@ namespace BillApp.Domain.Repository
             return numInvoices;
         }
 
-        public async Task<float> GetTotalInvoices(string userid)
+        public async Task<double> GetTotalInvoices(string userid)
         {
-            float TotalInvoice = await context.Invoices.Where(x => x.AuthorId == userid)
+            double TotalInvoice = await context.Invoices.Where(x => x.AuthorId == userid)
                                                        .Include(x => x.InvoiceItems)
                                                        .SumAsync(x => x.InvoiceItems.Sum(z => z.Quanty * z.ValueUnit));
             return TotalInvoice;
@@ -34,9 +34,9 @@ namespace BillApp.Domain.Repository
             return TotalCustomers;
         }
 
-        public async Task<float> GetNumOfArticles(string userid)
+        public async Task<double> GetNumOfArticles(string userid)
         {
-            float NumOfArticles = await context.Invoices.Where(x => x.AuthorId == userid)
+            double NumOfArticles = await context.Invoices.Where(x => x.AuthorId == userid)
                                                        .Include(x => x.InvoiceItems)
                                                        .SumAsync(x => x.InvoiceItems.Sum(z => z.Quanty));
 

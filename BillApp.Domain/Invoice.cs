@@ -30,9 +30,9 @@ namespace BillApp.Domain
         //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DateCreated { get; set; }
 
-        public float Total { get; set; }
+        public double Total { get; set; }
 
-        public float Tax { get; set; }
+        public double Tax { get; set; }
 
         public List<InvoiceItem> InvoiceItems { get; set; }
     }

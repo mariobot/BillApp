@@ -16,15 +16,15 @@ namespace BillApp.Domain
         [Required(ErrorMessage = "* Requerido")]
         [RegularExpression("([0-9]+)", ErrorMessage = "Solo Numeros")]
         [Range(1,9999,ErrorMessage ="Valor fuera del rango 1 - 9999")]        
-        public float Quanty { get; set; }
+        public double Quanty { get; set; }
 
         [Required(ErrorMessage = "* Requerido")]
         [RegularExpression("([0-9]+)", ErrorMessage = "Solo Numeros")]
-        public float ValueUnit { get; set; }
+        public double ValueUnit { get; set; }
 
         [Required(ErrorMessage = "* Requerido")]
         [RegularExpression("([0-9]+)", ErrorMessage = "Solo numeros")]
-        public float ValueTotal { get; set; }
+        public double ValueTotal { get; set; }
 
         public int InvoiceId { get; set; }
         public Invoice Invoice { get; set; }

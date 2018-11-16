@@ -72,6 +72,10 @@
     <Compile Include="Migrations\201811012257170_UpdateProxieDefinition.Designer.cs">
       <DependentUpon>201811012257170_UpdateProxieDefinition.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811161601083_UpdateFloatToDouble.cs" />
+    <Compile Include="Migrations\201811161601083_UpdateFloatToDouble.Designer.cs">
+      <DependentUpon>201811161601083_UpdateFloatToDouble.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="InvoiceHeader.cs" />
@@ -94,6 +98,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811012257170_UpdateProxieDefinition.resx">
       <DependentUpon>201811012257170_UpdateProxieDefinition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811161601083_UpdateFloatToDouble.resx">
+      <DependentUpon>201811161601083_UpdateFloatToDouble.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
