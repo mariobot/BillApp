@@ -44,8 +44,14 @@ namespace BillApp.Web.Controllers
 
         // GET: InvoiceHeader/Create
         public ActionResult Create()
-        {            
-            return View();
+        {
+            // For user you only have one InvoiceHeader
+            InvoiceHeader _invH = _repo.GetInvoiceHeaderByUser(User.Identity.GetUserId());
+
+            if (_invH == null)
+                return View();
+            else
+                return RedirectToAction("Edit", "InvoiceHeader", new { id = _invH.Id });
         }
 
         // POST: InvoiceHeader/Create

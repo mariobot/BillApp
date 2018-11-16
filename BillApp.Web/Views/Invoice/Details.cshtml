@@ -4,12 +4,11 @@
     ViewBag.Title = "Details";
 }
 <div class="card">
-    <div class="header">
-        <h4>Factura</h4>
-    </div>
+    <br />
+    <br />
     <div class="row">
         <div class="col-lg-offset-1 col-lg-5">
-            <h5>Numero: @Model.InvoiceNumber</h5>
+            <h5>Facruta Numero: @Model.InvoiceNumber</h5>
         </div>
         <div class="col-lg-6">
             <h5>Fecha: @Model.DateCreated.ToShortDateString() @Model.DateCreated.ToShortTimeString()</h5>
@@ -34,7 +33,7 @@
     <hr />
     <div class="row">
         <div class="col-lg-offset-1 col-lg-5">
-            <h5>Cliente: @Model.Customer.Name + @Model.Customer.SurName </h5>
+            <h5>Cliente: @Model.Customer.Name  @Model.Customer.SurName </h5>
         </div>
         <div class="col-lg-6">
             <h5>Documento Cliente: @Model.Customer.Document</h5>
@@ -45,29 +44,45 @@
         <div class="col-lg-12">
             @if (Model.InvoiceItems != null)
             {
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-lg-offset-1 col-md-3"><text class="border-input">Articulo</text></div>
+                        <div class="col-md-1 text-right"><text class="border-input">Cantidad</text></div>
+                        <div class="col-md-2 text-right"><text class="border-input">Valor Unidad</text></div>
+                        <div class="col-md-2 text-right"><text class="border-input">Valor Linea</text></div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-2"></div>
+                    </div>
+                    <div class="clearfix"><br /></div>
+                </div>
+
+
+
                 foreach (var item in Model.InvoiceItems)
                 {
                     <div class="row">
                         <div class="form-group">
-                            <div class="col-lg-offset-1 col-md-3"><text class="form-control border-input">@item.item</text></div>
-                            <div class="col-md-1"><text class="form-control border-input">@item.Quanty</text></div>
-                            <div class="col-md-2"><text class="form-control border-input">@item.ValueUnit</text></div>
-                            <div class="col-md-2"><text class="form-control border-input">@item.ValueTotal</text></div>
+                            <div class="col-lg-offset-1 col-md-3"><text class="border-input">@item.item</text></div>
+                            <div class="col-md-1 text-right"><text class="border-input text-right">@item.Quanty</text></div>
+                            <div class="col-md-2 text-right"><text class="border-input">@item.ValueUnit</text></div>
+                            <div class="col-md-2 text-right"><text class="border-input">@item.ValueTotal</text></div>
                             <div class="col-md-2"></div>
                             <div class="col-md-2"></div>
-                        </div>                    
+                        </div>
                     </div>
+                }
             }
-        }
-        </div>        
+        </div>
     </div>
     <hr />
     <div class="row">
-        <div class="col-lg-offset-9 col-lg-3 text-right">
+        <div class="col-lg-offset-6 col-lg-3 text-right">
             <h3>Impuesto: @Model.Tax</h3>
             <h3>Total: @Model.Total</h3>
         </div>
     </div>
+    <br />
+    <br />
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

@@ -26,6 +26,7 @@ namespace BillApp.Domain.Repository
             Invoice _invoice = context.Invoices.Where(x => x.AuthorId == userid && x.Id == id)
                                                 .Include(x => x.InvoiceHeader)
                                                 .Include(x => x.InvoiceItems)
+                                                .Include(x => x.Customer)
                                                 .FirstOrDefault();
             _invoice.Total = _invoice.InvoiceItems.Sum(x => x.Quanty * x.ValueTotal);
             _invoice.Tax = _invoice.InvoiceItems.Sum(x => x.Quanty * x.ValueTotal) * 0.19;

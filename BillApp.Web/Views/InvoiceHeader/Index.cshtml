@@ -3,80 +3,67 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="col-lg-8 col-md-7">
+    <div class="card">
+        <div class="header">
+            <h4 class="title">Mi Encabezado de factura</h4>
+        </div>
+        <div class="content">           
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Nombre Empresa</label>
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Nombre Empresa", @disabled="" } })                            
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Identificacion</label>
+                            @Html.EditorFor(model => model.Identification, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Identificacion", @disabled = "" } })                            
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Direccion</label>
+                            @Html.EditorFor(model => model.Adress, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Direccion", @disabled = "" } })                            
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Telefono</label>
+                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Telefono", @disabled = "" } })                            
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Email</label>
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Email", @disabled = "" } })                            
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Secuencia</label>
+                            @Html.EditorFor(model => model.Sequence, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Secuencia", @disabled = "" } })                            
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Prefijo</label>
+                            @Html.EditorFor(model => model.Prefix, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Prefijo", @disabled = "" } })                            
+                        </div>
+                    </div>
+                </div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<div>
-    <h4>InvoiceHeader</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Author.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Author.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Identification)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Identification)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Adress)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Adress)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Sequence)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Sequence)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Prefix)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Prefix)
-        </dd>
-
-    </dl>
+                <div class="text-center">
+                    <a type="submit" class="btn btn-info btn-fill btn-wd">Editar Encabezado</a>
+                </div>
+                <div class="clearfix"></div>            
+        </div>
+    </div>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
