@@ -19,6 +19,7 @@ namespace BillApp.Web.Controllers
         private InvoiceItemRepository _repoInvItem = new InvoiceItemRepository();
 
         // GET: Invoice
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult Index()
         {
             var invoices = _repo.GetInvoicesByUserId(User.Identity.GetUserId());            
