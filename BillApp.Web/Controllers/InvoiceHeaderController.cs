@@ -112,7 +112,7 @@ namespace BillApp.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            _repo.DeleteInvoiceHeader(User.Identity.GetUserId(),id);            
+            //_repo.DeleteInvoiceHeader(User.Identity.GetUserId(),id);            
             return RedirectToAction("Index");
         }
 

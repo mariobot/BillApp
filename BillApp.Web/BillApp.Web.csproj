@@ -441,8 +441,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\InvoiceHeader\Create.cshtml" />
-    <Content Include="Views\InvoiceHeader\Delete.cshtml" />
-    <Content Include="Views\InvoiceHeader\Details.cshtml" />
     <Content Include="Views\InvoiceHeader\Edit.cshtml" />
     <Content Include="Views\InvoiceHeader\Index.cshtml" />
     <Content Include="Views\Customer\Create.cshtml" />
