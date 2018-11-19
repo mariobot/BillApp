@@ -42,7 +42,6 @@
     {
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Invoice.InvoiceNumber)
-        @Html.HiddenFor(model => model.Invoice.InvoiceHeader.Id)
         @Html.HiddenFor(model => model.Invoice.InvoiceHeader.Identification)
         @Html.HiddenFor(model => model.Invoice.InvoiceHeader.Name)
         @Html.HiddenFor(model => model.Invoice.InvoiceHeader.Adress)
@@ -54,7 +53,7 @@
 
         <div class="row">
             <div class="col-lg-offset-1 col-lg-5">
-                <h5>Cliente:</h5>
+                <h5>Cliente:</h5> 
             </div>
             <div class="col-lg-4">
                 @Html.DropDownListFor(x => x.Invoice.CustomerId, (SelectList)ViewBag.CustomerId, htmlAttributes: new { @class = "form-control" })
@@ -101,7 +100,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-offset-4 col-md-5 text-center">
+        <div class="col-md-offset-2 col-md-5 text-center">
             @if (TempData["errorItems"] != null)
             {
                 <div class="alert alert-danger">
@@ -110,12 +109,12 @@
                 </div>
             }
         </div>
-        <div class="col-md-3">
-            <input type="button" class="btn btn-defaults" onclick="$('#CreateInvoice').submit()" name="Create" value="Crear Factura" />
+        <div class="col-md-6">
+            <input type="button" class="btn btn-defaults" onclick="$('#CreateInvoice').submit()" name="Create" value="Crear Factura" />           
         </div>
     </div>
     <div class="row">
-
+        
     </div>
 </div>
 

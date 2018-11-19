@@ -53,9 +53,8 @@ namespace BillApp.Web.Controllers
             _invoice.InvoiceNumber = _invoice.Prefix + _invoice.Sequence;
 
             ViewBag.CustomerId = new SelectList(_repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()), "Id", "Document");
-
-            if (Session["items"]==null)
-                Session["items"] = new List<InvoiceItem>();
+            
+            Session["items"] = new List<InvoiceItem>();
 
             // Pendiente customer
             //_invoice.CustomerId = _repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()).FirstOrDefault().Id;            
@@ -70,8 +69,21 @@ namespace BillApp.Web.Controllers
         [HttpPost]
         public ActionResult Create(InvoiceViewModels invoiceVM) {
 
+            if (((List<InvoiceItem>)Session["items"]).Any())
+            {
+                List<InvoiceItem> _items = (List<InvoiceItem>)Session["items"];
+                _repo.AddInvoice(invoiceVM.Invoice, _items);
+                return RedirectToAction("Index", "Invoice");
+            }
+            else
+            {
+                TempData["errorItems"] = "Es necesario adicionar lineas a la factura.";
+            }
 
-            return null;
+            ViewBag.CustomerId = new SelectList(_repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()), "Id", "Document",invoiceVM.Invoice.CustomerId);
+
+            invoiceVM.InvoiceItems = (List<InvoiceItem>)Session["items"];
+            return View(invoiceVM);
         }
 
         [HttpPost]

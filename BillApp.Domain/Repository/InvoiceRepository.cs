@@ -11,12 +11,20 @@ namespace BillApp.Domain.Repository
     {
         private BillAppDbContext context = new BillAppDbContext();
 
-        public void AddInvoice(Invoice _invoice) {
-            InvoiceHeader invH = _invoice.InvoiceHeader;
+        public void AddInvoice(Invoice _invoice, List<InvoiceItem> _items) {
+
+            InvoiceHeader invH = context.InvoiceHeaders.Where(x => x.Id == _invoice.InvoiceHeaderId).FirstOrDefault();
+            
             _invoice.InvoiceHeader = null;
             _invoice.DateCreated = DateTime.Now;
 
             context.Invoices.Add(_invoice);
+
+            foreach (var item in _items)
+            {
+                item.InvoiceId = _invoice.Id;
+                context.InvoiceItems.Add(item);
+            }
 
             invH.Sequence += 1;
             context.Entry(invH).State = EntityState.Modified;
