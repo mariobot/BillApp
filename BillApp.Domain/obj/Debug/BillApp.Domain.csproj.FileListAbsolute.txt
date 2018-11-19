@@ -18,3 +18,4 @@ C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\obj\Debug\BillApp.Domain.c
 C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\obj\Debug\BillApp.Domain.dll
 C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\obj\Debug\BillApp.Domain.pdb
 C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\obj\Debug\BillApp.Domain.Migrations.UpdateFloatToDouble.resources
+C:\Users\mabotero\source\repos\BillApp\BillApp.Domain\obj\Debug\BillApp.Domain.csprojAssemblyReference.cache

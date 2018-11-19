@@ -22,7 +22,7 @@ namespace BillApp.Web.Controllers
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult Index()
         {
-            var invoices = _repo.GetInvoicesByUserId(User.Identity.GetUserId());            
+            var invoices = _repo.GetInvoicesByUserId(User.Identity.GetUserId());
             return View(invoices);
         }
 
@@ -47,22 +47,30 @@ namespace BillApp.Web.Controllers
             InvoiceHeader _invoiceHeader = _repoInvHeader.GetInvoiceHeaderByUser(User.Identity.GetUserId());
             _invoice.InvoiceHeader = _invoiceHeader;
             _invoice.AuthorId = User.Identity.GetUserId();
-            _invoice.DateCreated = DateTime.Now;
             _invoice.InvoiceHeaderId = _invoiceHeader.Id;
             _invoice.Prefix = _invoiceHeader.Prefix;
             _invoice.Sequence = _invoiceHeader.Sequence + 1;
             _invoice.InvoiceNumber = _invoice.Prefix + _invoice.Sequence;
-            _invoice.CustomerId = _repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()).FirstOrDefault().Id;
 
-            _repo.AddInvoice(_invoice);
+            ViewBag.CustomerId = new SelectList(_repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()), "Id", "Document");
 
-            ViewBag.InvoiceId = _invoice.Id;
+            Session["items"] = new List<InvoiceItem>();
+
+            // Pendiente customer
+            //_invoice.CustomerId = _repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()).FirstOrDefault().Id;            
 
             InvoiceViewModels invoiceVM = new InvoiceViewModels();
             invoiceVM.InvoiceItems = new List<InvoiceItem>();
             invoiceVM.Invoice = _invoice;
 
             return View(invoiceVM);
+        }
+
+        [HttpPost]
+        public ActionResult Create(InvoiceViewModels invoiceVM) {
+
+
+            return null;
         }
 
         private ActionResult ValidateInitConfig()

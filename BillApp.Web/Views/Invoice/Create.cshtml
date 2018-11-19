@@ -5,7 +5,7 @@
 
     AjaxOptions options = new AjaxOptions();
     options.HttpMethod = "POST";
-    options.InsertionMode = InsertionMode.Replace;
+    options.InsertionMode = InsertionMode.Replace;    
     options.UpdateTargetId = "invoiceItem";    
 }
 
@@ -18,7 +18,7 @@
             <h5>Numero: @Model.Invoice.InvoiceNumber</h5>
         </div>
         <div class="col-lg-6">
-            <h5>Fecha: @Model.Invoice.DateCreated.ToShortDateString() @Model.Invoice.DateCreated.ToShortTimeString()</h5>
+            <h5>Fecha: @DateTime.Now</h5>
         </div>
     </div>
     <div class="row">
@@ -38,47 +38,65 @@
         </div>
     </div>
     <hr />
-    <div class="row">
+    @using (Html.BeginForm("Create", "Invoice", FormMethod.Post, new { id = "CreateInvoice" }))
+    {
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Invoice.AuthorId)
+        @Html.HiddenFor(model => model.Invoice.InvoiceHeaderId)
+        @Html.HiddenFor(model => model.Invoice.Prefix)
+        @Html.HiddenFor(model => model.Invoice.Sequence)
 
-    </div>
-    <hr />
-    <div class="row">
-        <div class="col-lg-12">
-            <div id="invoiceItem" class="success">
-                @Html.Partial("_InvItems", Model.InvoiceItems)
+        <div class="row">
+            <div class="col-lg-offset-1 col-lg-5">
+                <h5>Cliente: @Html.DropDownListFor(x=>x.Invoice.CustomerId, (SelectList)ViewBag.CustomerId, htmlAttributes: new { @class = "form-control" })</h5>
+                @*<h5>Cliente: @Html.DropDownList("CustomerId", null, htmlAttributes: new { @class = "form-control" })</h5>*@
+                @Html.ValidationMessageFor(model => model.Invoice.CustomerId, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-lg-12">
-            <div class="card">
-                @using (Ajax.BeginForm("AddLine", options))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.HiddenFor(model => model.Invoice.Id)
-                    <div class="form-group">
-                        <div class="col-lg-offset-1 col-md-3">
-                            @Html.EditorFor(model => model.InvoiceItem.item, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Articulo" } })
-                            @Html.ValidationMessageFor(model => model.InvoiceItem.item, "", new { @class = "text-danger" })
+    }
+        <hr />
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="invoiceItem" class="success">
+                    @Html.Partial("_InvItems", Model.InvoiceItems)
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="card">
+                    @using (Ajax.BeginForm("AddLineSession", options))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.Invoice.Id)
+                        <div class="form-group">
+                            <div class="col-lg-offset-1 col-md-3">
+                                @Html.EditorFor(model => model.InvoiceItem.item, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Articulo" } })
+                                @Html.ValidationMessageFor(model => model.InvoiceItem.item, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-1">
+                                @Html.EditorFor(model => model.InvoiceItem.Quanty, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Unidades" } })
+                                @Html.ValidationMessageFor(model => model.InvoiceItem.Quanty, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-2">
+                                @Html.EditorFor(model => model.InvoiceItem.ValueUnit, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Valor Unidad" } })
+                                @Html.ValidationMessageFor(model => model.InvoiceItem.ValueUnit, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-2">
+                                @Html.EditorFor(model => model.InvoiceItem.ValueTotal, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Valor Total" } })
+                                @Html.ValidationMessageFor(model => model.InvoiceItem.ValueTotal, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-3">
+                                <input type="submit" value="Adicionar Linea" name="AddLine" class="btn btn-default" />
+                            </div>
                         </div>
-                        <div class="col-md-1">
-                            @Html.EditorFor(model => model.InvoiceItem.Quanty, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Unidades" } })
-                            @Html.ValidationMessageFor(model => model.InvoiceItem.Quanty, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="col-md-2">
-                            @Html.EditorFor(model => model.InvoiceItem.ValueUnit, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Valor Unidad" } })
-                            @Html.ValidationMessageFor(model => model.InvoiceItem.ValueUnit, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="col-md-2">
-                            @Html.EditorFor(model => model.InvoiceItem.ValueTotal, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Valor Total" } })
-                            @Html.ValidationMessageFor(model => model.InvoiceItem.ValueTotal, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="col-md-3">
-                            <input type="submit" value="Adicionar Linea" class="btn btn-default" />
-                        </div>
-                    </div>
-                }
+                    }
+                </div>
             </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-lg-offset-6">
+                <input type="button" class="btn btn-defaults" onclick="$('#CreateInvoice').submit()" name="Create" value="Crear Factura" />
+            </div>
+        </div>
 </div>
 
 <div>

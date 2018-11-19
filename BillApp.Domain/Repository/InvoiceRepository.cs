@@ -14,6 +14,7 @@ namespace BillApp.Domain.Repository
         public void AddInvoice(Invoice _invoice) {
             InvoiceHeader invH = _invoice.InvoiceHeader;
             _invoice.InvoiceHeader = null;
+            _invoice.DateCreated = DateTime.Now;
 
             context.Invoices.Add(_invoice);
 
