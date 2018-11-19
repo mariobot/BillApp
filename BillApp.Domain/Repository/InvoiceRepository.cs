@@ -37,8 +37,8 @@ namespace BillApp.Domain.Repository
                                                 .Include(x => x.InvoiceItems)
                                                 .Include(x => x.Customer)
                                                 .FirstOrDefault();
-            _invoice.Total = _invoice.InvoiceItems.Sum(x => x.Quanty * x.ValueTotal);
-            _invoice.Tax = _invoice.InvoiceItems.Sum(x => x.Quanty * x.ValueTotal) * 0.19;
+            _invoice.Total = _invoice.InvoiceItems.Sum(x => x.Quanty * x.ValueUnit);
+            _invoice.Tax = _invoice.InvoiceItems.Sum(x => x.Quanty * x.ValueUnit) * 0.19;
             return _invoice;
         }
 

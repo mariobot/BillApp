@@ -54,10 +54,7 @@ namespace BillApp.Web.Controllers
 
             ViewBag.CustomerId = new SelectList(_repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()), "Id", "Document");
             
-            Session["items"] = new List<InvoiceItem>();
-
-            // Pendiente customer
-            //_invoice.CustomerId = _repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()).FirstOrDefault().Id;            
+            Session["items"] = new List<InvoiceItem>();            
 
             InvoiceViewModels invoiceVM = new InvoiceViewModels();
             invoiceVM.InvoiceItems = (List<InvoiceItem>)Session["items"];

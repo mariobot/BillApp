@@ -11,6 +11,7 @@
 
 @if (Model != null)
 {
+    double Total = 0;
     foreach (var item in Model)
     {
         <div id=@String.Format("{0}{1}","item",item.id) class="row">
@@ -19,14 +20,24 @@
                 <div class="col-md-1"><text class="form-control border-input">@item.Quanty</text></div>
                 <div class="col-md-2"><text class="form-control border-input">@item.ValueUnit</text></div>
                 <div class="col-md-2"><text class="form-control border-input">@item.ValueTotal</text></div>
-                <div class="col-md-2">@Ajax.ActionLink("Eliminar", "DeleteLine", new { id = item.id, invoiceid = item.InvoiceId }, options)</div>
-                <div class="col-md-2">@Ajax.ActionLink("Editar", "LoadEditLine", new { id = item.id, invoiceid = item.InvoiceId }, new AjaxOptions() {
-                                         HttpMethod = "POST",
-                                         InsertionMode = InsertionMode.Replace,
-                                         UpdateTargetId = String.Format("{0}{1}","item",item.id)
-                                 })
-                </div>                
+                <div class="col-md-1">@Ajax.ActionLink("Eliminar", "DeleteLine", new { id = item.id, invoiceid = item.InvoiceId }, options, htmlAttributes: new { @class = "btn btn-small" })</div>
+                <div class="col-md-1">
+                    @Ajax.ActionLink("Editar", "LoadEditLine", new { id = item.id, invoiceid = item.InvoiceId }, new AjaxOptions() {
+                                    HttpMethod = "POST",
+                                    InsertionMode = InsertionMode.Replace,
+                                    UpdateTargetId = String.Format("{0}{1}","item",item.id)
+                                }, htmlAttributes: new { @class="btn btn-small" } )
+                </div>
             </div>
         </div>
+        Total += item.Quanty * item.ValueUnit;
     }
+    double Tax = Total * 0.19;
+    <hr />
+    <div class="row">
+        <div class="col-lg-offset-6 col-lg-3 text-right">
+            <h3>Impuesto: @Tax</h3>
+            <h3>Total: @Total</h3>
+        </div>
+    </div>
 }

@@ -11,7 +11,8 @@
 
 @if (Model != null)
 {
-    int count = 0;
+    int count = 0;    
+    double Total = 0;
     foreach (var item in Model)
     {
         <div id=@String.Format("{0}{1}","item",count) class="row">
@@ -20,15 +21,25 @@
                 <div class="col-md-1"><text class="form-control border-input">@item.Quanty</text></div>
                 <div class="col-md-2"><text class="form-control border-input">@item.ValueUnit</text></div>
                 <div class="col-md-2"><text class="form-control border-input">@item.ValueTotal</text></div>
-                <div class="col-md-2">@Ajax.ActionLink("Eliminar", "DeleteLineSession", new { id = count }, options)</div>
-                <div class="col-md-2">@Ajax.ActionLink("Editar", "LoadEditLineSession", new { id = count }, new AjaxOptions() {
-                                     HttpMethod = "POST",
-                                     InsertionMode = InsertionMode.Replace,
-                                     UpdateTargetId = String.Format("{0}{1}", "item",count)
-                                 })
-                </div>                
+                <div class="col-md-1">@Ajax.ActionLink("Eliminar", "DeleteLineSession", new { id = count }, options, htmlAttributes: new { @class = "btn btn-small" })</div>
+                <div class="col-md-1">
+                    @Ajax.ActionLink("Editar", "LoadEditLineSession", new { id = count }, new AjaxOptions() {
+                    HttpMethod = "POST",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = String.Format("{0}{1}", "item",count)
+                    }, htmlAttributes: new { @class = "btn btn-small" })
+                </div>
             </div>
         </div>
         count += 1;
+        Total += item.Quanty * item.ValueUnit;
     }
+    double Tax = Total * 0.19;
+    <hr />
+    <div class="row">
+        <div class="col-lg-offset-6 col-lg-3 text-right">
+            <h3>Impuesto: @Tax</h3>
+            <h3>Total: @Total</h3>
+        </div>
+    </div>
 }
