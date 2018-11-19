@@ -458,6 +458,8 @@
     <Content Include="Views\Invoice\_InvItems.cshtml" />
     <Content Include="Views\Invoice\_EditLine.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Invoice\_InvItemsSession.cshtml" />
+    <Content Include="Views\Invoice\_EditLineSession.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,34 @@
+﻿@model List<BillApp.Domain.InvoiceItem>
+
+@{
+    ViewBag.Title = "Create";
+
+    AjaxOptions options = new AjaxOptions();
+    options.HttpMethod = "POST";
+    options.InsertionMode = InsertionMode.Replace;
+    options.UpdateTargetId = "invoiceItem";
+}
+
+@if (Model != null)
+{
+    int count = 0;
+    foreach (var item in Model)
+    {
+        <div id=@String.Format("{0}{1}","item",count) class="row">
+            <div class="form-group">
+                <div class="col-lg-offset-1 col-md-3"><text class="form-control border-input">@item.item</text></div>
+                <div class="col-md-1"><text class="form-control border-input">@item.Quanty</text></div>
+                <div class="col-md-2"><text class="form-control border-input">@item.ValueUnit</text></div>
+                <div class="col-md-2"><text class="form-control border-input">@item.ValueTotal</text></div>
+                <div class="col-md-2">@Ajax.ActionLink("Eliminar", "DeleteLineSession", new { id = count }, options)</div>
+                <div class="col-md-2">@Ajax.ActionLink("Editar", "LoadEditLineSession", new { id = count }, new AjaxOptions() {
+                                     HttpMethod = "POST",
+                                     InsertionMode = InsertionMode.Replace,
+                                     UpdateTargetId = String.Format("{0}{1}", "item",count)
+                                 })
+                </div>                
+            </div>
+        </div>
+        count += 1;
+    }
+}

@@ -54,13 +54,14 @@ namespace BillApp.Web.Controllers
 
             ViewBag.CustomerId = new SelectList(_repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()), "Id", "Document");
 
-            Session["items"] = new List<InvoiceItem>();
+            if (Session["items"]==null)
+                Session["items"] = new List<InvoiceItem>();
 
             // Pendiente customer
             //_invoice.CustomerId = _repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()).FirstOrDefault().Id;            
 
             InvoiceViewModels invoiceVM = new InvoiceViewModels();
-            invoiceVM.InvoiceItems = new List<InvoiceItem>();
+            invoiceVM.InvoiceItems = (List<InvoiceItem>)Session["items"];
             invoiceVM.Invoice = _invoice;
 
             return View(invoiceVM);
@@ -71,6 +72,46 @@ namespace BillApp.Web.Controllers
 
 
             return null;
+        }
+
+        [HttpPost]
+        public ActionResult AddLineSession(InvoiceViewModels invoiceVM)
+        {
+            List<InvoiceItem> _items = (List<InvoiceItem>)Session["items"];
+            _items.Add(invoiceVM.InvoiceItem);
+            Session["items"] = _items;
+            return PartialView("_InvItemsSession", _items);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteLineSession(int id)
+        {
+            List<InvoiceItem> _items = (List<InvoiceItem>)Session["items"];
+            _items.RemoveAt(id);
+            Session["items"] = _items;
+            return PartialView("_InvItemsSession", _items);
+        }
+
+        [HttpPost]
+        public ActionResult LoadEditLineSession(int id)
+        {
+            List<InvoiceItem> _items = (List<InvoiceItem>)Session["items"];
+            InvoiceItem _itemToEdit = _items.ElementAt(id);
+            Session["EditItem"]= id;
+            return PartialView("_EditLineSession", _itemToEdit);
+        }
+
+        [HttpPost]
+        public ActionResult EditLineSession(InvoiceItem _invoiceItem)
+        {
+            List<InvoiceItem> _items = (List<InvoiceItem>)Session["items"];
+            int editItem = (int)Session["EditItem"];
+            _items.ElementAt(editItem).item = _invoiceItem.item;
+            _items.ElementAt(editItem).Quanty = _invoiceItem.Quanty;
+            _items.ElementAt(editItem).ValueUnit = _invoiceItem.ValueUnit;
+            _items.ElementAt(editItem).ValueTotal = _invoiceItem.ValueTotal;
+            Session["items"] = _items;
+            return PartialView("_InvItemsSession", _items);
         }
 
         private ActionResult ValidateInitConfig()

@@ -1,0 +1,55 @@
+﻿@model BillApp.Domain.InvoiceItem
+
+@{
+    AjaxOptions options = new AjaxOptions();
+    options.HttpMethod = "POST";
+    options.InsertionMode = InsertionMode.Replace;
+    options.UpdateTargetId = "invoiceItem";    
+}
+
+<style>
+    .form-control:focus {
+        border-color: #ff0000;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+    }
+
+    .has-error .form-control:focus {
+        box-shadow: none;
+        -webkit-box-shadow: none;
+    }
+</style>
+
+@* Con esta adicion funciona la validacion dentro del formulario *@
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Ajax.BeginForm("EditLineSession", options))
+{   
+    @Html.AntiForgeryToken()        
+    <div class="">
+        <div class="form-group">
+            <div class="col-lg-offset-1 col-md-3">                
+                @Html.EditorFor(model => model.item, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Articulo" } })
+                @Html.ValidationMessageFor(model => model.item, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-1">
+                @Html.EditorFor(model => model.Quanty, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Unidades" } })
+                @Html.ValidationMessageFor(model => model.Quanty, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.ValueUnit, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Valor Unidad" } })
+                @Html.ValidationMessageFor(model => model.ValueUnit, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.ValueTotal, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Valor Total" } })
+                @Html.ValidationMessageFor(model => model.ValueTotal, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-3">
+                <input type="submit" value="Actualizar Linea" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
