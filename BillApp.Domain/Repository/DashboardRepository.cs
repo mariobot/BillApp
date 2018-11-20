@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BillApp.Domain;
 
 namespace BillApp.Domain.Repository
 {
@@ -25,6 +27,11 @@ namespace BillApp.Domain.Repository
             return TotalInvoice;
         }
 
+        /// <summary>
+        /// Get the total of Customers with have invoices
+        /// </summary>
+        /// <param name="userid">ID User</param>
+        /// <returns></returns>
         public async Task<int> GetTotalCustomers(string userid)
         {
             int TotalCustomers = await context.Invoices.Where(x => x.AuthorId == userid)
@@ -34,6 +41,11 @@ namespace BillApp.Domain.Repository
             return TotalCustomers;
         }
 
+        /// <summary>
+        /// Get the number of articles
+        /// </summary>
+        /// <param name="userid">ID of User</param>
+        /// <returns></returns>
         public async Task<double> GetNumOfArticles(string userid)
         {
             double NumOfArticles = await context.Invoices.Where(x => x.AuthorId == userid)
@@ -43,6 +55,25 @@ namespace BillApp.Domain.Repository
             return NumOfArticles;
 
         }
+
+        public List<DateCount> GetDaysWithInvoice(string userid)
+        {
+            List<DateCount> lista = context.Invoices.Where(x => x.AuthorId == userid)
+                                                 .GroupBy(f => new {
+                                                     Day = f.DateCreated.Day,                                        
+                                                     Month = f.DateCreated.Month,
+                                                     Year = f.DateCreated.Year                                                    
+                                                 })
+                                                 .Select(g => new DateCount
+                                                 {
+                                                     Day = g.Key.Day,
+                                                     Month = g.Key.Month,
+                                                     Year = g.Key.Year,
+                                                     Count = g.Count()
+                                                 }).ToList();
+            
+            return lista;
+        }        
 
         public void Dispose() {
             context.Dispose();

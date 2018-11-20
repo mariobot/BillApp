@@ -1,6 +1,8 @@
-﻿using BillApp.Domain.Repository;
+﻿using BillApp.Domain;
+using BillApp.Domain.Repository;
 using BillApp.Web.Models;
 using Microsoft.AspNet.Identity;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -22,6 +24,13 @@ namespace BillApp.Web.Controllers
                 NumOfArticles = await _repoDash.GetNumOfArticles(User.Identity.GetUserId())
             };
             return View(dashVM);
+        }
+
+        public ActionResult Months() {
+
+            List<DateCount> days = _repoDash.GetDaysWithInvoice(User.Identity.GetUserId());
+
+            return PartialView("_Days",days);
         }
     }
 }

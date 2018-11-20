@@ -12,4 +12,11 @@ namespace BillApp.Web.Models
         public int NumCustomers { get; set; }
         public double NumOfArticles { get; set; }
     }
+
+    public class MonthViewModels
+    {
+        public DateTime Date { get; set; }
+        public int CountInvoice { get; set; }
+        public string Day { get; set; }
+    }
 }
