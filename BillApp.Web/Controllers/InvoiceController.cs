@@ -87,6 +87,7 @@ namespace BillApp.Web.Controllers
         public ActionResult AddLineSession(InvoiceViewModels invoiceVM)
         {
             List<InvoiceItem> _items = (List<InvoiceItem>)Session["items"];
+            invoiceVM.InvoiceItem.ValueTotal = invoiceVM.InvoiceItem.Quanty * invoiceVM.InvoiceItem.ValueUnit;
             _items.Add(invoiceVM.InvoiceItem);
             Session["items"] = _items;
             return PartialView("_InvItemsSession", _items);
@@ -118,7 +119,7 @@ namespace BillApp.Web.Controllers
             _items.ElementAt(editItem).item = _invoiceItem.item;
             _items.ElementAt(editItem).Quanty = _invoiceItem.Quanty;
             _items.ElementAt(editItem).ValueUnit = _invoiceItem.ValueUnit;
-            _items.ElementAt(editItem).ValueTotal = _invoiceItem.ValueTotal;
+            _items.ElementAt(editItem).ValueTotal = _invoiceItem.Quanty * _invoiceItem.ValueUnit;
             Session["items"] = _items;
             return PartialView("_InvItemsSession", _items);
         }
@@ -191,6 +192,7 @@ namespace BillApp.Web.Controllers
         public ActionResult AddLine(InvoiceViewModels invoiceVM)
         {
             invoiceVM.InvoiceItem.InvoiceId = invoiceVM.Invoice.Id;
+            invoiceVM.InvoiceItem.ValueTotal = invoiceVM.InvoiceItem.Quanty * invoiceVM.InvoiceItem.ValueUnit;
             _repoInvItem.AddInvoiceItem(invoiceVM.InvoiceItem);
             invoiceVM.InvoiceItems = _repoInvItem.GetItemsOfInvoice(User.Identity.GetUserId(), invoiceVM.Invoice.Id);
             return PartialView("_InvItems", invoiceVM.InvoiceItems);
@@ -214,6 +216,7 @@ namespace BillApp.Web.Controllers
         [HttpPost]
         public ActionResult EditLine(InvoiceItem _invoiceItem)
         {
+            _invoiceItem.ValueTotal = _invoiceItem.Quanty * _invoiceItem.ValueUnit;
             _repoInvItem.UpdateInvoiceItem(_invoiceItem);                        
             List<InvoiceItem> _items = _repoInvItem.GetItemsOfInvoice(User.Identity.GetUserId(), _invoiceItem.InvoiceId);
             return PartialView("_InvItems", _items);

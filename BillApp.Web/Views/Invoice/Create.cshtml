@@ -67,6 +67,7 @@
                 {
                     @Html.AntiForgeryToken()
                     @Html.HiddenFor(model => model.Invoice.Id)
+                    @Html.HiddenFor(model => model.InvoiceItem.ValueTotal)
                     <div class="form-group">
                         <div class="col-lg-offset-1 col-md-3">
                             @Html.EditorFor(model => model.InvoiceItem.item, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Articulo" } })
@@ -81,8 +82,8 @@
                             @Html.ValidationMessageFor(model => model.InvoiceItem.ValueUnit, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-md-2">
-                            @Html.EditorFor(model => model.InvoiceItem.ValueTotal, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Valor Total" } })
-                            @Html.ValidationMessageFor(model => model.InvoiceItem.ValueTotal, "", new { @class = "text-danger" })
+                            @*@Html.EditorFor(model => model.InvoiceItem.ValueTotal, new { htmlAttributes = new { @class = "form-control border-input", @placeholder = "Valor Total" } })
+                            @Html.ValidationMessageFor(model => model.InvoiceItem.ValueTotal, "", new { @class = "text-danger" })*@
                         </div>
                         <div class="col-md-3">
                             <input type="submit" value="Adicionar Linea" name="AddLine" class="btn btn-default" />
