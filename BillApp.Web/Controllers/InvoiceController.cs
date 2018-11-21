@@ -2,7 +2,6 @@
 using BillApp.Domain.Repository;
 using BillApp.Web.Models;
 using Microsoft.AspNet.Identity;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;

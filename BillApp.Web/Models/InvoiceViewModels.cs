@@ -1,8 +1,5 @@
-﻿using System;
+﻿using BillApp.Domain;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using BillApp.Domain;
 
 namespace BillApp.Web.Models
 {
