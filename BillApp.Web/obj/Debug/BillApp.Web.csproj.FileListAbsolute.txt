@@ -133,3 +133,4 @@ C:\Users\mabotero\source\repos\BillApp\BillApp.Web\obj\Debug\BillApp.Web.csproj.
 C:\Users\mabotero\source\repos\BillApp\BillApp.Web\obj\Debug\BillApp.Web.csproj.CopyComplete
 C:\Users\mabotero\source\repos\BillApp\BillApp.Web\obj\Debug\BillApp.Web.dll
 C:\Users\mabotero\source\repos\BillApp\BillApp.Web\obj\Debug\BillApp.Web.pdb
+C:\Users\mabotero\source\repos\BillApp\BillApp.Web\bin\Rotativa.dll

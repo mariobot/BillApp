@@ -6,6 +6,7 @@
 
 <p>
     @Html.ActionLink("Crear Factura", "Create")
+    @Html.ActionLink("ALL PDF", "InvoiceListToPdf")
 </p>
 
 <div class="card">
@@ -63,6 +64,7 @@
                             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                             @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                             @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            @Html.ActionLink("PDF", "InvoiceToPdf", new { id = item.Id })
                         </td>
                     </tr>
                 }

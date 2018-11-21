@@ -2,8 +2,10 @@
 using BillApp.Domain.Repository;
 using BillApp.Web.Models;
 using Microsoft.AspNet.Identity;
+using Rotativa;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web.Mvc;
 
 namespace BillApp.Web.Controllers
@@ -27,14 +29,33 @@ namespace BillApp.Web.Controllers
 
         // GET: Invoice/Details/5
         public ActionResult Details(int id)
-        {
-
+        {            
             Invoice invoice = _repo.GetInvoiceById(User.Identity.GetUserId(), id);
-            if (invoice == null)
-            {
-                return HttpNotFound();
-            }
+            if (invoice == null)            
+                return HttpNotFound();            
             return View(invoice);
+        }
+
+        public ActionResult InvoiceToPdf(int id) {
+
+            Dictionary<string, string> cookieCollection = new Dictionary<string, string>();
+            foreach (var key in Request.Cookies.AllKeys)
+            {
+                cookieCollection.Add(key, Request.Cookies.Get(key).Value);
+            }
+
+            return new ActionAsPdf("Details", new { id = id }) { FileName = "Test.pdf" , Cookies = cookieCollection };
+        }
+
+        public ActionResult InvoiceListToPdf()
+        {
+            Dictionary<string, string> cookieCollection = new Dictionary<string, string>();
+            foreach (var key in Request.Cookies.AllKeys)
+            {
+                cookieCollection.Add(key, Request.Cookies.Get(key).Value);
+            }
+
+            return new ActionAsPdf("Index") { FileName = "TestIndex.pdf", Cookies = cookieCollection };
         }
 
         // GET: Invoice/Create
