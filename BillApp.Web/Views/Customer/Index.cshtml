@@ -21,7 +21,7 @@
                         <div class="col-xs-12">
                             <strong>@item.Name  @item.SurName </strong>
                             <a href="@Url.Action("Edit","Customer",new { id = item.Id})"><btn class="btn btn-sm btn-success btn-icon"><i class="ti-pencil"></i></btn></a>
-                            <a href="@Url.Action("Delete","Customer",new { id = item.Id})"><btn class="btn btn-danger btn-icon"><i class="ti-close"></i></btn></a>
+                            <a onclick="return confirm('Esta seguro de eliminar este cliente?');" href="@Url.Action("Delete","Customer",new { id = item.Id })"><btn class="btn btn-danger btn-icon"><i class="ti-close"></i></btn></a>
                             <p> <i class="ti-email"></i> <span class="text-info"><small> @item.Email</small></span></p>
                             <p> <i class="ti-mobile"></i> <span class="text-info"><small>@item.Phone</small></span></p>
                         </div>                       
