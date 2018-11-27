@@ -84,30 +84,15 @@ namespace BillApp.Web.Controllers
 
         // GET: Customer/Delete/5
         public ActionResult Delete(int id)
-        {   
-            Customer customer = _repo.GetCustomerById(User.Identity.GetUserId(),id);
-            if (customer == null)
-            {
-                return HttpNotFound();
-            }
-            return View(customer);
-        }
-
-        // POST: Customer/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
         {
-            _repo.DeleteCustomer(User.Identity.GetUserId(),id);            
-            return RedirectToAction("Index");
+            _repo.DeleteCustomer(User.Identity.GetUserId(), id);
+            return RedirectToAction("Index");            
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                _repo.Dispose();
-            }
+            if (disposing)            
+                _repo.Dispose();            
             base.Dispose(disposing);
         }
     }
