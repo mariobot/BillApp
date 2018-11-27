@@ -57,21 +57,21 @@
                         </a>
                     </li>
                     <li>
-                        <a href="maps.html">
+                        <a href="#">
                             <i class="ti-map"></i>
-                            <p>Maps</p>
+                            <p>Mapas</p>
                         </a>
                     </li>
                     <li>
-                        <a href="notifications.html">
+                        <a href="#">
                             <i class="ti-bell"></i>
-                            <p>Notifications</p>
+                            <p>Notificaciones</p>
                         </a>
                     </li>
                     <li class="active-pro">
-                        <a href="upgrade.html">
+                        <a href="#">
                             <i class="ti-export"></i>
-                            <p>Upgrade to PRO</p>
+                            <p>Actualizar</p>
                         </a>
                     </li>
                 </ul>
@@ -87,10 +87,18 @@
                             <span class="icon-bar bar2"></span>
                             <span class="icon-bar bar3"></span>
                         </button>
-                        <a class="navbar-brand" href="#"></a>
+                        <div class="navbar-brand">
+                            
+                        </div>
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a class="btn btn-fill btn-wd" href="@Url.Action("Create","Invoice")">
+                                    Crear Factura
+                                </a>
+                            </li>
+                            <li><a>|</a></li>
                             @Html.Partial("_LoginPartial")
                             <li>
                                 <a href="@Url.Action("Index","Dashboard")" class="dropdown-toggle">
@@ -164,7 +172,6 @@
             </footer>
         </div>
     </div>
-
 </body>
 
 @Scripts.Render("~/bundles/jquery")
