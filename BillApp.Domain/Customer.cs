@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,14 +11,19 @@ namespace BillApp.Domain
     {
         public int Id { get; set; }
 
+        [Required(ErrorMessage = "* Requerido")]
+        [DataType(DataType.Text)]
         public string Document { get; set; }
 
+        [Required(ErrorMessage = "* Requerido")]
         public string Name { get; set; }
 
         public string SurName { get; set; }
 
+        [Required(ErrorMessage = "* Requerido")]
         public string Phone { get; set; }
 
+        [Required(ErrorMessage = "* Requerido")]
         public string Email { get; set; }
 
         public string AuthorId { get; set; }
