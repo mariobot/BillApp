@@ -470,10 +470,10 @@
     <Content Include="Views\Invoice\_InvItemsSession.cshtml" />
     <Content Include="Views\Invoice\_EditLineSession.cshtml" />
     <Content Include="Views\Dashboard\_Days.cshtml" />
+    <Content Include="Views\Report\ByDates.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Report\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

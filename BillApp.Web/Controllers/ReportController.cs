@@ -9,6 +9,12 @@ namespace BillApp.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult ByDates(string startDate, string endDate)
+        {
+
+            return View();
+        }
         
     }
 }
