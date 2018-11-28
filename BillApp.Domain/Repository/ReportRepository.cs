@@ -12,15 +12,14 @@ namespace BillApp.Domain.Repository
     {
         private BillAppDbContext context = new BillAppDbContext();        
 
-        public List<Invoice> GetInvoicesByDate(string userid, DateTime StartDate, DateTime EndDate)
+        public List<Invoice> GetInvoicesByDate(DateTime startDate, DateTime endDate, string userid)
         {
-            List<Invoice> _invoices = context.Invoices.Where(x => x.AuthorId == userid && x.DateCreated >= StartDate && x.DateCreated <= EndDate)                                                
+            List<Invoice> _invoices = context.Invoices.Where(x => x.AuthorId == userid && x.DateCreated >= startDate && x.DateCreated <= endDate)                                                
                                                 .Include(x => x.InvoiceItems)
                                                 .Include(x => x.Customer)
                                                 .ToList();            
             
             return _invoices;
         }
-
     }
 }
