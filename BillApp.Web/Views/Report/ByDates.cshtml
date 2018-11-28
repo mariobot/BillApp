@@ -84,10 +84,10 @@
                                         @sum
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                                        @Html.ActionLink("PDF", "InvoiceToPdf", new { id = item.Id })
+                                        <a href="@Url.Action("Edit","Invoice", new { id = item.Id })"><span class="ti-pencil"></span></a>
+                                        <a href="@Url.Action("Details","Invoice", new { id = item.Id })"><span class="ti-info"></span></a>
+                                        <a href="@Url.Action("Delete","Invoice", new { id = item.Id })"><span class="ti-eraser"></span></a>
+                                        <a href="@Url.Action("InvoiceToPdf","Invoice", new { id = item.Id })"><span class="ti-book"></span></a>                                        
                                     </td>
                                 </tr>
                             }

@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 
 namespace BillApp.Web.Controllers
 {
+    [Authorize]
     public class ReportController : Controller
     {
         private ReportRepository _repo = new ReportRepository();
