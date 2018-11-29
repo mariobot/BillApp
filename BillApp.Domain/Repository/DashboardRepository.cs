@@ -21,10 +21,14 @@ namespace BillApp.Domain.Repository
 
         public async Task<double> GetTotalInvoices(string userid)
         {
-            double TotalInvoice = await context.Invoices.Where(x => x.AuthorId == userid)
+            try
+            {
+                double TotalInvoice = await context.Invoices.Where(x => x.AuthorId == userid && x.InvoiceItems.Count > 0)
                                                        .Include(x => x.InvoiceItems)
                                                        .SumAsync(x => x.InvoiceItems.Sum(z => z.Quanty * z.ValueUnit));
-            return TotalInvoice;
+                return TotalInvoice;
+            }
+            catch (Exception){ return 0; }
         }
 
         /// <summary>
@@ -48,12 +52,15 @@ namespace BillApp.Domain.Repository
         /// <returns></returns>
         public async Task<double> GetNumOfArticles(string userid)
         {
-            double NumOfArticles = await context.Invoices.Where(x => x.AuthorId == userid)
+            try
+            {
+                double NumOfArticles = await context.Invoices.Where(x => x.AuthorId == userid)
                                                        .Include(x => x.InvoiceItems)
                                                        .SumAsync(x => x.InvoiceItems.Sum(z => z.Quanty));
 
-            return NumOfArticles;
-
+                return NumOfArticles;
+            }
+            catch (Exception){ return 0; }
         }
 
         public List<DateCount> GetDaysWithInvoice(string userid)

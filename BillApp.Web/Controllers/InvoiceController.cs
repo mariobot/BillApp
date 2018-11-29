@@ -61,7 +61,15 @@ namespace BillApp.Web.Controllers
         // GET: Invoice/Create
         public ActionResult Create()
         {
-            ValidateInitConfig();
+            InvoiceHeader _invoiceH = _repoInvHeader.GetInvoiceHeaderByUser(User.Identity.GetUserId());
+
+            if (_invoiceH == null)
+                return RedirectToAction("Create", "InvoiceHeader");
+
+            Customer _customer = _repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()).FirstOrDefault();
+
+            if (_customer == null)
+                return RedirectToAction("Create", "Customer");
 
             Invoice _invoice = new Invoice();
             InvoiceHeader _invoiceHeader = _repoInvHeader.GetInvoiceHeaderByUser(User.Identity.GetUserId());
@@ -143,22 +151,7 @@ namespace BillApp.Web.Controllers
             _items.ElementAt(editItem).ValueTotal = _invoiceItem.Quanty * _invoiceItem.ValueUnit;
             Session["items"] = _items;
             return PartialView("_InvItemsSession", _items);
-        }
-
-        private ActionResult ValidateInitConfig()
-        {
-            InvoiceHeader _invoiceH = _repoInvHeader.GetInvoiceHeaderByUser(User.Identity.GetUserId());
-
-            if (_invoiceH == null)
-                return RedirectToAction("Create", "InvoiceHeader");
-
-            Customer _customer = _repoCustomer.GetCustomersByUserId(User.Identity.GetUserId()).FirstOrDefault();
-
-            if (_customer == null)
-                return RedirectToAction("Create", "Customer");
-
-            return null;
-        }
+        }       
 
         // GET: Invoice/Edit/5
         public ActionResult Edit(int id)
