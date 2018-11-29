@@ -3,6 +3,7 @@ using BillApp.Domain.Repository;
 using BillApp.Web.Models;
 using Microsoft.AspNet.Identity;
 using Rotativa;
+using Rotativa.Options;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -44,7 +45,14 @@ namespace BillApp.Web.Controllers
                 cookieCollection.Add(key, Request.Cookies.Get(key).Value);
             }
 
-            return new ActionAsPdf("Details", new { id = id }) { FileName = "Test.pdf" , Cookies = cookieCollection };
+            return new ActionAsPdf("Details", new { id = id })
+                {
+                    FileName = "Test.pdf" ,
+                    Cookies = cookieCollection,
+                    PageSize = Size.A4,
+                    IsGrayScale = true,
+                    PageMargins = new Margins { Bottom = 5, Left = 5, Right = 5, Top = 5 },
+            };
         }
 
         public ActionResult InvoiceListToPdf()

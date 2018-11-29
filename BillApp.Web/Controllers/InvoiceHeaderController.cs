@@ -20,6 +20,10 @@ namespace BillApp.Web.Controllers
         {
             string userid = User.Identity.GetUserId();
             InvoiceHeader invoiceHeader = _repo.GetInvoiceHeaderByUser(userid);
+
+            if (invoiceHeader == null)            
+                return RedirectToAction("Create", "InvoiceHeader");           
+
             return View(invoiceHeader);
         }
 
