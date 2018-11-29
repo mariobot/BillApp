@@ -8,15 +8,6 @@
 <head>
     @Styles.Render("~/Content/css")
 </head>
-<!-- Relation manual-->
-@*<link href="~/assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/assets/css/animate.min.css" rel="stylesheet" />
-    <link href="~/assets/css/paper-dashboard.css" rel="stylesheet" />
-    <link href="~/assets/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="~/assets/css/fontgoogle.css" rel="stylesheet" />
-    <link href="~/assets/css/themify-icons.css" rel="stylesheet" />*@
-<!-- Relation manual-->
 <body>
     <div class="card">
         <br />
@@ -100,8 +91,8 @@
         <br />
     </div>
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Volver", "Index")
         @Html.ActionLink("PDF", "InvoiceToPdf", new { id = Model.Id })
     </p>
 </body>

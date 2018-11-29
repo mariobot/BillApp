@@ -24,6 +24,7 @@ namespace BillApp.Domain
         public string Phone { get; set; }
 
         [Required(ErrorMessage = "* Requerido")]
+        [EmailAddress(ErrorMessage ="No tiene formato de Email")]
         public string Email { get; set; }
 
         public string AuthorId { get; set; }

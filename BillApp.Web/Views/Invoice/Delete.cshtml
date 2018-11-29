@@ -5,8 +5,7 @@
 }
 
 <h3>Esta seguro de eliminar esta factura?</h3>
-<div>
-    <h4>Invoice</h4>
+<div>    
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -85,10 +84,8 @@
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
-
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Eliminar" class="btn btn-default" />
         </div>
     }
 </div>

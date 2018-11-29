@@ -4,11 +4,6 @@
     ViewBag.Title = "Lista de Facturas";    
 }
 
-<p>
-    @Html.ActionLink("Crear Factura", "Create")
-    @Html.ActionLink("ALL PDF", "InvoiceListToPdf")
-</p>
-
 <div class="card">
     <div class="row">
         <div class="col-lg-12">
@@ -61,9 +56,9 @@
                             @sum
                         </td>                        
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Ver Factura", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }) |
                             @Html.ActionLink("PDF", "InvoiceToPdf", new { id = item.Id })
                         </td>
                     </tr>

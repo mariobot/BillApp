@@ -90,6 +90,7 @@ namespace BillApp.Web.Controllers
             {
                 List<InvoiceItem> _items = (List<InvoiceItem>)Session["items"];
                 _repo.AddInvoice(invoiceVM.Invoice, _items);
+                TempData["errorItems"] = null;
                 return RedirectToAction("Index", "Invoice");
             }
             else
