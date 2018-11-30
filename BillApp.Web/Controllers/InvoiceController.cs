@@ -14,7 +14,6 @@ namespace BillApp.Web.Controllers
     [Authorize]
     public class InvoiceController : Controller
     {
-
         private InvoiceRepository _repo = new InvoiceRepository();
         private CustomerRepository _repoCustomer = new CustomerRepository();
         private InvoiceHeaderRepository _repoInvHeader = new InvoiceHeaderRepository();
@@ -40,18 +39,16 @@ namespace BillApp.Web.Controllers
         public ActionResult InvoiceToPdf(int id) {
 
             Dictionary<string, string> cookieCollection = new Dictionary<string, string>();
-            foreach (var key in Request.Cookies.AllKeys)
-            {
-                cookieCollection.Add(key, Request.Cookies.Get(key).Value);
-            }
+            foreach (var key in Request.Cookies.AllKeys)            
+                cookieCollection.Add(key, Request.Cookies.Get(key).Value);            
 
             return new ActionAsPdf("Details", new { id = id })
                 {
-                    FileName = "Test.pdf" ,
+                    FileName = "Factura.pdf" ,
                     Cookies = cookieCollection,
                     PageSize = Size.A4,
                     IsGrayScale = true,
-                    PageMargins = new Margins { Bottom = 5, Left = 5, Right = 5, Top = 5 },
+                    PageMargins = new Margins { Bottom = 5, Left = 5, Right = 5, Top = 5 }
             };
         }
 
@@ -59,11 +56,9 @@ namespace BillApp.Web.Controllers
         {
             Dictionary<string, string> cookieCollection = new Dictionary<string, string>();
             foreach (var key in Request.Cookies.AllKeys)
-            {
-                cookieCollection.Add(key, Request.Cookies.Get(key).Value);
-            }
+                cookieCollection.Add(key, Request.Cookies.Get(key).Value);            
 
-            return new ActionAsPdf("Index") { FileName = "TestIndex.pdf", Cookies = cookieCollection };
+            return new ActionAsPdf("Index") { FileName = "Factura.pdf", Cookies = cookieCollection };
         }
 
         // GET: Invoice/Create
